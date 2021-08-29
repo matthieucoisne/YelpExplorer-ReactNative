@@ -1,4 +1,3 @@
-import { useQuery } from "@apollo/client";
 import React from "react";
 import {
   View,
@@ -10,48 +9,44 @@ import {
   TouchableOpacity,
   SafeAreaView,
 } from "react-native";
-import { businessListQuery } from "../../data/graphql/BusinessListQuery";
+import { BusinessUiModel, useBusinessList } from "./useBusinessList";
 
-const BusinessRow = ({ business }) => {
+const BusinessRow = ({ business }: { business: BusinessUiModel }) => {
   return (
     <TouchableOpacity
       onPress={() => {
-        console.log("ROFLCOPTER", `${business.name}`);
+        console.log(`${business.name} clicked!`);
       }}
     >
       <View style={styles.listItem}>
         <Text>{business.name}</Text>
-        <Image style={styles.photo} source={{ uri: business.photos[0] }} />
+        <Image style={styles.photo} source={{ uri: business.photo }} />
       </View>
     </TouchableOpacity>
   );
 };
 
 const BusinessListView = () => {
-  const { data, loading } = useQuery(businessListQuery, {
-    variables: {
-      term: "Sushi",
-      location: "Montreal",
-      sortBy: "price",
-      limit: 20,
-    },
-  });
+  const { isLoading, businessList } = useBusinessList(
+    "Sushi",
+    "Montreal",
+    "price",
+    20
+  );
 
   return (
     <SafeAreaView style={styles.screen}>
-      {loading ? (
+      {isLoading ? (
         <ActivityIndicator size="large" />
       ) : (
         <FlatList
           horizontal={false}
           showsHorizontalScrollIndicator={true}
-          data={data.search.business}
+          data={businessList}
           renderItem={({ item }) => {
             return <BusinessRow business={item} />;
           }}
-          keyExtractor={(business) => {
-            business.id;
-          }}
+          keyExtractor={(business: BusinessUiModel) => business.id}
         />
       )}
     </SafeAreaView>
