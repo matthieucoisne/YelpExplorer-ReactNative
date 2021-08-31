@@ -3,22 +3,22 @@ import {
   ApolloLink,
   createHttpLink,
   InMemoryCache,
-} from "@apollo/client";
+} from '@apollo/client';
 
-import { setContext } from "@apollo/client/link/context";
+import {setContext} from '@apollo/client/link/context';
 
 const httpLink = createHttpLink({
-  uri: "https://api.yelp.com/v3/graphql",
+  uri: 'https://api.yelp.com/v3/graphql',
 });
 
-const authLink = setContext((_, { headers }) => {
-  const token = "YOUR_TOKEN_HERE";
+const authLink = setContext((_, {headers}) => {
+  const token = 'YOUR_TOKEN_HERE';
   return {
     headers: {
       ...headers,
-      Authorization: token ? `Bearer ${token}` : "",
-      "content-type": "application/json",
-      "accept-language": "en_US",
+      Authorization: token ? `Bearer ${token}` : '',
+      'content-type': 'application/json',
+      'accept-language': 'en_US',
     },
   };
 });

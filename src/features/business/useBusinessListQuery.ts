@@ -1,17 +1,17 @@
-import { useQuery } from "@apollo/client";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { businessListQuery } from "../../data/graphql/BusinessListQuery";
-import BusinessDataModel from "../../data/model/BusinessDataModel";
-import BusinessDomainModel from "../../domain/model/BusinessDomainModel";
+import {useQuery} from '@apollo/client';
+import {useEffect, useState} from 'react';
+import {businessListQuery} from '../../data/graphql/BusinessListQuery';
+import BusinessDataModel from '../../data/model/BusinessDataModel';
+import BusinessDomainModel from '../../domain/model/BusinessDomainModel';
 
 const useBusinessListQuery = (
   term: String,
   location: String,
   sortBy: String,
-  limit: number
+  limit: number,
 ) => {
   const [businessList, setBusinessList] = useState([]);
-  const { data, loading, error } = useQuery(businessListQuery, {
+  const {data, loading, error} = useQuery(businessListQuery, {
     variables: {
       term,
       location,
@@ -29,11 +29,11 @@ const useBusinessListQuery = (
           photo: business.photos[0],
         };
         return businessDomainModel;
-      }) ?? []
+      }) ?? [],
     );
   }, [data]);
 
-  return { businessList, loading, error };
+  return {businessList, loading, error};
 };
 
 export default useBusinessListQuery;

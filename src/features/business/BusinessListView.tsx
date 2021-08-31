@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   View,
   Image,
@@ -8,30 +8,29 @@ import {
   FlatList,
   TouchableOpacity,
   SafeAreaView,
-} from "react-native";
-import { BusinessUiModel, useBusinessList } from "./useBusinessList";
+} from 'react-native';
+import {BusinessUiModel, useBusinessList} from './useBusinessList';
 
-const BusinessRow = ({ business }: { business: BusinessUiModel }) => {
+const BusinessRow = ({business}: {business: BusinessUiModel}) => {
   return (
     <TouchableOpacity
       onPress={() => {
         console.log(`${business.name} clicked!`);
-      }}
-    >
+      }}>
       <View style={styles.listItem}>
         <Text>{business.name}</Text>
-        <Image style={styles.photo} source={{ uri: business.photo }} />
+        <Image style={styles.photo} source={{uri: business.photo}} />
       </View>
     </TouchableOpacity>
   );
 };
 
 const BusinessListView = () => {
-  const { isLoading, businessList } = useBusinessList(
-    "Sushi",
-    "Montreal",
-    "price",
-    20
+  const {isLoading, businessList} = useBusinessList(
+    'Sushi',
+    'Montreal',
+    'price',
+    20,
   );
 
   return (
@@ -43,7 +42,7 @@ const BusinessListView = () => {
           horizontal={false}
           showsHorizontalScrollIndicator={true}
           data={businessList}
-          renderItem={({ item }) => {
+          renderItem={({item}) => {
             return <BusinessRow business={item} />;
           }}
           keyExtractor={(business: BusinessUiModel) => business.id}
@@ -58,10 +57,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   listItem: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     borderBottomWidth: 1,
-    borderColor: "#333",
+    borderColor: '#333',
     marginHorizontal: 20,
     paddingVertical: 20,
   },
