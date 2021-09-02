@@ -12,5 +12,10 @@
     "build": true
   },
   "editor.tabSize": 2,
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "prettier.printWidth": 110,
+  "prettier.bracketSpacing": false,
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "all",
+  "prettier.arrowParens": "avoid"
 }
