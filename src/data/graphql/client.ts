@@ -12,11 +12,12 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, {headers}) => {
-  const token = 'YOUR_TOKEN_HERE';
+  const appConfig = require('../../../config/app_config.json');
+
   return {
     headers: {
       ...headers,
-      Authorization: token ? `Bearer ${token}` : '',
+      Authorization: `Bearer ${appConfig.api_key}`,
       'content-type': 'application/json',
       'accept-language': 'en_US',
     },
