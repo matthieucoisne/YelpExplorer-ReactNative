@@ -1,7 +1,10 @@
-import {useEffect} from 'react';
-import {useReducer} from 'react';
+import {useEffect, useReducer} from 'react';
 import BusinessDomainModel from '../../domain/model/BusinessDomainModel';
-import useBusinessListQuery from './useBusinessListQuery';
+import useBusinessListQuery from '../../domain/hook/useBusinessListQuery';
+
+// This is a where we handle user actions and call our domain custom hooks to perform CRUD operations
+// Once we get the data (domain-transformed) back, we can generate a new state that could be consumed by a view
+// This file does not care about who is calling it, it's completelly decoupled from the view
 
 export interface BusinessUiModel {
   id: string;
@@ -58,6 +61,7 @@ export const useBusinessList = (
 
   useEffect(() => {
     const businessUiList: BusinessUiModel[] =
+      // can/should we extract the mapping logic here into some other file for more clarity?
       businessList.map((businessDomainModel: BusinessDomainModel) => {
         const businessUiModel: BusinessUiModel = {
           id: businessDomainModel.id,
