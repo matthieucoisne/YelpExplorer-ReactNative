@@ -1,26 +1,27 @@
-import {useQuery} from '@apollo/client';
+import {ApolloError, useQuery} from '@apollo/client';
 import {useEffect, useState} from 'react';
-import {businessListQuery} from '../../data/graphql/BusinessListQuery';
-import BusinessDataModel from '../../data/model/BusinessDataModel';
-import BusinessDomainModel from '../model/BusinessDomainModel';
-
-// TODO: should we create an interface? how?
-// interface ?? {
-//   useBusinessListQuery (): {};
-// }
+import {businessListQuery} from '../../data/graphql/query/BusinessListQuery';
+import {BusinessListResponse, toDomainModels} from '../../data/model/BusinessDataModel';
+import {BusinessDomainModel} from '../model/BusinessDomainModel';
 
 // Custom hook that is only responsible for calling another hook whose responsibilty
 // is to get/persist the data from the internet and transforming it into something domain related.
 // I believe it's like a usecase, and useQuery is like a repository. <- I need to double check on this
 
-const useBusinessListQuery = (
+export interface UseBusinessListQueryHook {
+  businesses: BusinessDomainModel[];
+  loading: boolean;
+  error: ApolloError | undefined;
+}
+
+export const useBusinessListQuery = (
   term: String,
   location: String,
   sortBy: String,
   limit: number,
-) => {
-  const [businessList, setBusinessList] = useState([]);
-  const {data, loading, error} = useQuery(businessListQuery, {
+): UseBusinessListQueryHook => {
+  const [businesses, setBusinesses] = useState<BusinessDomainModel[]>([]);
+  const {data, loading, error} = useQuery<BusinessListResponse>(businessListQuery, {
     variables: {
       term,
       location,
@@ -30,20 +31,8 @@ const useBusinessListQuery = (
   });
 
   useEffect(() => {
-    setBusinessList(
-      data?.search.business.map((business: BusinessDataModel) => {
-        // can/should we extract the mapping logic here into some other file for more clarity?
-        const businessDomainModel: BusinessDomainModel = {
-          id: business.id,
-          name: business.name,
-          photo: business.photos[0],
-        };
-        return businessDomainModel;
-      }) ?? [],
-    );
-  }, [data]);
+    setBusinesses(toDomainModels(data?.search?.business ?? []));
+  }, [data, loading, error]);
 
-  return {businessList, loading, error};
+  return {businesses, loading, error};
 };
-
-export default useBusinessListQuery;

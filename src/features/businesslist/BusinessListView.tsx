@@ -3,20 +3,22 @@ import {
   View,
   Image,
   Text,
-  StyleSheet,
   ActivityIndicator,
   FlatList,
   TouchableOpacity,
   SafeAreaView,
+  StyleSheet,
 } from 'react-native';
-import {BusinessUiModel, useBusinessList} from './useBusinessList';
+import {BusinessUiModel} from './BusinessUiModel';
+import {useBusinessList} from './useBusinessList';
 
 const BusinessRow = ({business}: {business: BusinessUiModel}) => {
   return (
     <TouchableOpacity
       onPress={() => {
         console.log(`${business.name} clicked!`);
-      }}>
+      }}
+    >
       <View style={styles.listItem}>
         <Text>{business.name}</Text>
         <Image style={styles.photo} source={{uri: business.photo}} />
@@ -26,12 +28,7 @@ const BusinessRow = ({business}: {business: BusinessUiModel}) => {
 };
 
 const BusinessListView = () => {
-  const {isLoading, businessList} = useBusinessList(
-    'Sushi',
-    'Montreal',
-    'price',
-    20,
-  );
+  const {isLoading, businesses} = useBusinessList('Sushi', 'Montreal', 'price', 20);
 
   return (
     <SafeAreaView style={styles.screen}>
@@ -41,7 +38,7 @@ const BusinessListView = () => {
         <FlatList
           horizontal={false}
           showsHorizontalScrollIndicator={true}
-          data={businessList}
+          data={businesses}
           renderItem={({item}) => {
             return <BusinessRow business={item} />;
           }}
