@@ -12,6 +12,28 @@ import {
 import {BusinessUiModel} from './BusinessUiModel';
 import {useBusinessList} from './useBusinessList';
 
+const BusinessListView: React.FC = () => {
+  const {state} = useBusinessList('Sushi', 'Montreal', 'price', 20);
+
+  return (
+    <SafeAreaView style={styles.screen}>
+      {state.isLoading ? (
+        <ActivityIndicator size="large" />
+      ) : (
+        <FlatList
+          horizontal={false}
+          showsHorizontalScrollIndicator={true}
+          data={state.businesses}
+          renderItem={({item}) => {
+            return <BusinessRow business={item} />;
+          }}
+          keyExtractor={(business: BusinessUiModel) => business.id}
+        />
+      )}
+    </SafeAreaView>
+  );
+};
+
 const BusinessRow = ({business}: {business: BusinessUiModel}) => {
   return (
     <TouchableOpacity
@@ -24,28 +46,6 @@ const BusinessRow = ({business}: {business: BusinessUiModel}) => {
         <Image style={styles.photo} source={{uri: business.photo}} />
       </View>
     </TouchableOpacity>
-  );
-};
-
-const BusinessListView = () => {
-  const {isLoading, businesses} = useBusinessList('Sushi', 'Montreal', 'price', 20);
-
-  return (
-    <SafeAreaView style={styles.screen}>
-      {isLoading ? (
-        <ActivityIndicator size="large" />
-      ) : (
-        <FlatList
-          horizontal={false}
-          showsHorizontalScrollIndicator={true}
-          data={businesses}
-          renderItem={({item}) => {
-            return <BusinessRow business={item} />;
-          }}
-          keyExtractor={(business: BusinessUiModel) => business.id}
-        />
-      )}
-    </SafeAreaView>
   );
 };
 

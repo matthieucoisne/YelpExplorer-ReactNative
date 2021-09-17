@@ -1,12 +1,8 @@
 import {ApolloError, useQuery} from '@apollo/client';
-import {useEffect, useState} from 'react';
+import {useMemo} from 'react';
 import {businessListQuery} from '../../data/graphql/query/BusinessListQuery';
 import {BusinessListResponse, toDomainModels} from '../../data/model/BusinessDataModel';
 import {BusinessDomainModel} from '../model/BusinessDomainModel';
-
-// Custom hook that is only responsible for calling another hook whose responsibilty
-// is to get/persist the data from the internet and transforming it into something domain related.
-// I believe it's like a usecase, and useQuery is like a repository. <- I need to double check on this
 
 export interface UseBusinessListQueryHook {
   businesses: BusinessDomainModel[];
@@ -20,7 +16,6 @@ export const useBusinessListQuery = (
   sortBy: String,
   limit: number,
 ): UseBusinessListQueryHook => {
-  const [businesses, setBusinesses] = useState<BusinessDomainModel[]>([]);
   const {data, loading, error} = useQuery<BusinessListResponse>(businessListQuery, {
     variables: {
       term,
@@ -30,9 +25,9 @@ export const useBusinessListQuery = (
     },
   });
 
-  useEffect(() => {
-    setBusinesses(toDomainModels(data?.search?.business ?? []));
-  }, [data, loading, error]);
+  const businesses: BusinessDomainModel[] = useMemo(() => {
+    return toDomainModels(data?.search?.business ?? []);
+  }, [data]);
 
   return {businesses, loading, error};
 };

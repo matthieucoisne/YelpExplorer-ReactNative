@@ -3,9 +3,9 @@ import {useBusinessListQuery} from '../../domain/hook/useBusinessListQuery';
 import {BusinessDomainModel} from '../../domain/model/BusinessDomainModel';
 import {toUiModels, BusinessUiModel} from './BusinessUiModel';
 
-// This is a where we handle user actions and call our domain custom hooks to perform CRUD operations
-// Once we get the data (domain-transformed) back, we can generate a new state that could be consumed by a view
-// This file does not care about who is calling it, it's completelly decoupled from the view
+export interface UseBusinessListHook {
+  state: State;
+}
 
 interface State {
   isLoading: boolean;
@@ -55,7 +55,12 @@ const reducer = (state: State, action: Action): State => {
   }
 };
 
-export const useBusinessList = (term: String, location: String, sortBy: String, limit: number): State => {
+export const useBusinessList = (
+  term: String,
+  location: String,
+  sortBy: String,
+  limit: number,
+): UseBusinessListHook => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const {businesses, loading, error} = useBusinessListQuery(term, location, sortBy, limit);
 
@@ -69,5 +74,5 @@ export const useBusinessList = (term: String, location: String, sortBy: String, 
     }
   }, [businesses, loading, error]);
 
-  return state;
+  return {state};
 };
