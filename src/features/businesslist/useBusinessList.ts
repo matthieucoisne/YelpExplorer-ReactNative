@@ -67,10 +67,10 @@ export const useBusinessList = (
   useEffect(() => {
     if (loading) {
       dispatch({type: ActionType.LOADING});
-    } else if (businesses.length > 0 && error === undefined) {
-      dispatch({type: ActionType.SUCCESS, businesses: businesses});
+    } else if (error !== undefined) {
+      dispatch({type: ActionType.ERROR, error: Error(`Error: ${error}`)});
     } else {
-      // TODO Error
+      dispatch({type: ActionType.SUCCESS, businesses: businesses});
     }
   }, [businesses, loading, error]);
 
