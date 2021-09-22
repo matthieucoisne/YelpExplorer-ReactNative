@@ -16,9 +16,11 @@
     "react-native": "0.65.1"
   },
   "devDependencies": {
+    "@apollo/react-testing": "^4.0.0",
     "@babel/core": "^7.15.5",
     "@babel/runtime": "^7.15.4",
     "@react-native-community/eslint-config": "^3.0.1",
+    "@testing-library/react-hooks": "^7.0.2",
     "@types/jest": "^27.0.1",
     "@types/react": "^17.0.21",
     "@types/react-native": "^0.65.0",
