@@ -1,7 +1,6 @@
+import { ApolloProvider } from '@apollo/client';
 import React from 'react';
-
-import {ApolloProvider} from '@apollo/client';
-import {apolloClient} from './data/graphql/client';
+import { apolloClient } from './data/graphql/client';
 import BusinessListScreen from './features/businesslist/BusinessListScreen';
 
 const App = () => (

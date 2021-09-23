@@ -1,4 +1,4 @@
-import {BusinessDomainModel} from '../../domain/model/BusinessDomainModel';
+import { BusinessDomainModel } from '../../domain/model/BusinessDomainModel';
 
 export interface BusinessListResponse {
   search: {

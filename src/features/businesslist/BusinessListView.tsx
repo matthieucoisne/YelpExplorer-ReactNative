@@ -1,19 +1,19 @@
 import React from 'react';
 import {
-  View,
-  Image,
-  Text,
   ActivityIndicator,
   FlatList,
-  TouchableOpacity,
+  Image,
   SafeAreaView,
   StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import {BusinessUiModel} from './BusinessUiModel';
-import {useBusinessList} from './useBusinessList';
+import { BusinessUiModel } from './BusinessUiModel';
+import { useBusinessList } from './useBusinessList';
 
 const BusinessListView: React.FC = () => {
-  const {state} = useBusinessList('Sushi', 'Montreal', 'price', 20);
+  const { state } = useBusinessList('Sushi', 'Montreal', 'price', 20);
 
   return (
     <SafeAreaView style={styles.screen}>
@@ -24,7 +24,7 @@ const BusinessListView: React.FC = () => {
           horizontal={false}
           showsHorizontalScrollIndicator={true}
           data={state.businesses}
-          renderItem={({item}) => {
+          renderItem={({ item }) => {
             return <BusinessRow business={item} />;
           }}
           keyExtractor={(business: BusinessUiModel) => business.id}
@@ -34,7 +34,7 @@ const BusinessListView: React.FC = () => {
   );
 };
 
-const BusinessRow = ({business}: {business: BusinessUiModel}) => {
+const BusinessRow = ({ business }: { business: BusinessUiModel }) => {
   return (
     <TouchableOpacity
       onPress={() => {
@@ -43,7 +43,7 @@ const BusinessRow = ({business}: {business: BusinessUiModel}) => {
     >
       <View style={styles.listItem}>
         <Text>{business.name}</Text>
-        <Image style={styles.photo} source={{uri: business.photo}} />
+        <Image style={styles.photo} source={{ uri: business.photo }} />
       </View>
     </TouchableOpacity>
   );

@@ -1,6 +1,6 @@
-import {ApolloError, useQuery} from '@apollo/client';
-import {renderHook} from '@testing-library/react-hooks';
-import {useBusinessListQuery} from '../useBusinessListQuery';
+import { ApolloError, useQuery } from '@apollo/client';
+import { renderHook } from '@testing-library/react-hooks';
+import { useBusinessListQuery } from '../useBusinessListQuery';
 
 jest.mock('@apollo/client', () => {
   const originalModule = jest.requireActual('@apollo/client');
@@ -24,7 +24,7 @@ describe('useBusinessListQueryTests', () => {
     mockUseQuery.mockImplementation(() => ({
       data: {
         search: {
-          business: [{id: '', name: '', photos: ['http://']}],
+          business: [{ id: '', name: '', photos: ['http://'] }],
         },
       },
       loading: false,
@@ -32,10 +32,10 @@ describe('useBusinessListQueryTests', () => {
     }));
 
     // When
-    const {result} = renderHook(() => useBusinessListQuery(term, location, rating, limit));
+    const { result } = renderHook(() => useBusinessListQuery(term, location, rating, limit));
 
     // then
-    expect(result.current.businesses).toEqual([{id: '', name: '', photo: 'http://'}]);
+    expect(result.current.businesses).toEqual([{ id: '', name: '', photo: 'http://' }]);
     expect(result.current.loading).toEqual(false);
     expect(result.current.error).toBeUndefined();
   });
@@ -49,7 +49,7 @@ describe('useBusinessListQueryTests', () => {
     }));
 
     // When
-    const {result} = renderHook(() => useBusinessListQuery(term, location, rating, limit));
+    const { result } = renderHook(() => useBusinessListQuery(term, location, rating, limit));
 
     // then
     expect(result.current.businesses).toEqual([]);
@@ -59,7 +59,7 @@ describe('useBusinessListQueryTests', () => {
 
   it('error', async () => {
     // Given
-    const error = new ApolloError({})
+    const error = new ApolloError({});
     mockUseQuery.mockImplementation(() => ({
       data: undefined,
       loading: false,
@@ -67,7 +67,7 @@ describe('useBusinessListQueryTests', () => {
     }));
 
     // When
-    const {result} = renderHook(() => useBusinessListQuery(term, location, rating, limit));
+    const { result } = renderHook(() => useBusinessListQuery(term, location, rating, limit));
 
     // then
     expect(result.current.businesses).toEqual([]);
