@@ -35,15 +35,25 @@ const BusinessListView: React.FC = () => {
 };
 
 const BusinessRow = ({ business }: { business: BusinessUiModel }) => {
+  const onBusinessPressed = () => {
+    console.log(`${business.name} clicked!`);
+  };
+
   return (
-    <TouchableOpacity
-      onPress={() => {
-        console.log(`${business.name} clicked!`);
-      }}
-    >
-      <View style={styles.listItem}>
-        <Text>{business.name}</Text>
-        <Image style={styles.photo} source={{ uri: business.photo }} />
+    <TouchableOpacity onPress={onBusinessPressed}>
+      <View style={styles.card}>
+        <Image style={styles.photo} source={{ uri: business.imageUrl }} />
+        <View style={styles.info}>
+          <Text style={styles.title}>{business.name}</Text>
+          <View style={styles.rating}>
+            <Image style={styles.ratingImage} source={business.ratingImage} />
+            <Text style={styles.text}>{business.reviewCount}</Text>
+          </View>
+          <Text style={styles.text}>{business.priceAndCategories}</Text>
+          <Text style={styles.text} ellipsizeMode="tail" numberOfLines={1}>
+            {business.address}
+          </Text>
+        </View>
       </View>
     </TouchableOpacity>
   );
@@ -53,17 +63,42 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
   },
-  listItem: {
+  card: {
     flexDirection: 'row',
-    alignItems: 'center',
-    borderBottomWidth: 1,
-    borderColor: '#333',
-    marginHorizontal: 20,
-    paddingVertical: 20,
+    height: 100,
+    borderRadius: 8,
+    backgroundColor: '#AAA',
+    marginHorizontal: 4,
+    marginVertical: 2,
+  },
+  info: {
+    flexDirection: 'column',
+    height: 100,
+    marginHorizontal: 8,
+    paddingTop: 2,
+    alignItems: 'flex-start',
+    justifyContent: 'space-evenly',
   },
   photo: {
-    width: 200,
-    height: 200,
+    width: 100,
+    height: 100,
+    borderBottomLeftRadius: 8,
+    borderTopLeftRadius: 8,
+  },
+  title: {
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+  text: {
+    fontSize: 12,
+  },
+  rating: {
+    flexDirection: 'row',
+  },
+  ratingImage: {
+    width: 82,
+    height: 14,
+    marginRight: 8,
   },
 });
 

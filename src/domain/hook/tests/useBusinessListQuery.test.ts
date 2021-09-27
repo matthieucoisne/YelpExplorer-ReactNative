@@ -1,5 +1,7 @@
 import { ApolloError, useQuery } from '@apollo/client';
 import { renderHook } from '@testing-library/react-hooks';
+import { BusinessDataModel } from '../../../data/model/BusinessDataModel';
+import { BusinessDomainModel } from '../../model/BusinessDomainModel';
 import { useBusinessListQuery } from '../useBusinessListQuery';
 
 jest.mock('@apollo/client', () => {
@@ -21,11 +23,36 @@ describe('useBusinessListQueryTests', () => {
 
   it('success', async () => {
     // Given
+    const business: BusinessDataModel = {
+      id: 'id',
+      name: 'name',
+      location: {
+        address1: 'address1',
+        city: 'city',
+      },
+      categories: [
+        {
+          title: 'category#1',
+        },
+      ],
+      photos: ['http://'],
+      price: '$$',
+      rating: 4.5,
+      review_count: 1337,
+    };
+    const expectedBusiness: BusinessDomainModel = {
+      id: 'id',
+      name: 'name',
+      address: 'address1, city',
+      categories: ['category#1'],
+      imageUrl: 'http://',
+      price: '$$',
+      rating: 4.5,
+      reviewCount: 1337,
+    };
     mockUseQuery.mockImplementation(() => ({
       data: {
-        search: {
-          business: [{ id: '', name: '', photos: ['http://'] }],
-        },
+        search: { business: [business, business] },
       },
       loading: false,
       error: undefined,
@@ -35,7 +62,7 @@ describe('useBusinessListQueryTests', () => {
     const { result } = renderHook(() => useBusinessListQuery(term, location, rating, limit));
 
     // then
-    expect(result.current.businesses).toEqual([{ id: '', name: '', photo: 'http://' }]);
+    expect(result.current.businesses).toEqual([expectedBusiness, expectedBusiness]);
     expect(result.current.loading).toEqual(false);
     expect(result.current.error).toBeUndefined();
   });

@@ -1,6 +1,8 @@
 import { ApolloError } from '@apollo/client';
 import { renderHook } from '@testing-library/react-hooks';
 import * as useBusinessListQuery from '../../../domain/hook/useBusinessListQuery';
+import { BusinessDomainModel } from '../../../domain/model/BusinessDomainModel';
+import { BusinessUiModel } from '../BusinessUiModel';
 import { useBusinessList } from '../useBusinessList';
 
 describe('useBusinessList', () => {
@@ -13,14 +15,29 @@ describe('useBusinessList', () => {
 
   it('success', async () => {
     // Given
+    const business: BusinessDomainModel = {
+      id: 'id',
+      name: 'name',
+      address: 'address',
+      categories: ['category#1'],
+      imageUrl: 'http://',
+      price: '$$',
+      rating: 4.5,
+      reviewCount: 1337,
+    };
+    const expectedBusiness: BusinessUiModel = {
+      id: 'id',
+      name: '1. NAME',
+      address: 'address',
+      imageUrl: 'http://',
+      priceAndCategories: '$$  •  category#1',
+      reviewCount: '1337 reviews',
+      ratingImage: {
+        testUri: '../../../src/assets/stars_small_4_half.png',
+      },
+    };
     spy.mockReturnValue({
-      businesses: [
-        {
-          id: 'id',
-          name: 'name',
-          photo: 'photo',
-        },
-      ],
+      businesses: [business],
       loading: false,
       error: undefined,
     });
@@ -29,13 +46,7 @@ describe('useBusinessList', () => {
     const { result } = renderHook(() => useBusinessList(term, location, rating, limit));
 
     // Then
-    expect(result.current.state.businesses).toStrictEqual([
-      {
-        id: 'id',
-        name: 'name',
-        photo: 'photo',
-      },
-    ]);
+    expect(result.current.state.businesses).toStrictEqual([expectedBusiness]);
     expect(result.current.state.isLoading).toEqual(false);
     expect(result.current.state.error).toBeUndefined();
   });
