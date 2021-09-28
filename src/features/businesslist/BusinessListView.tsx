@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/core';
 import React from 'react';
 import {
   ActivityIndicator,
@@ -9,10 +10,11 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { businessDetailsScreenProp } from '../../App';
 import { BusinessUiModel } from './BusinessUiModel';
 import { useBusinessList } from './useBusinessList';
 
-const BusinessListView: React.FC = () => {
+export const BusinessListView: React.FC = () => {
   const { state } = useBusinessList('Sushi', 'Montreal', 'price', 20);
 
   return (
@@ -35,12 +37,16 @@ const BusinessListView: React.FC = () => {
 };
 
 const BusinessRow = ({ business }: { business: BusinessUiModel }) => {
-  const onBusinessPressed = () => {
-    console.log(`${business.name} clicked!`);
-  };
+  const navigationProp = useNavigation<businessDetailsScreenProp>();
 
   return (
-    <TouchableOpacity onPress={onBusinessPressed}>
+    <TouchableOpacity
+      onPress={() => {
+        navigationProp.navigation.navigate('BusinessDetails', {
+          businessId: business.id,
+        });
+      }}
+    >
       <View style={styles.card}>
         <Image style={styles.photo} source={{ uri: business.imageUrl }} />
         <View style={styles.info}>
@@ -71,6 +77,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 4,
     marginVertical: 2,
   },
+  photo: {
+    width: 100,
+    height: 100,
+    borderBottomLeftRadius: 8,
+    borderTopLeftRadius: 8,
+  },
   info: {
     flexDirection: 'column',
     height: 100,
@@ -78,12 +90,6 @@ const styles = StyleSheet.create({
     paddingTop: 2,
     alignItems: 'flex-start',
     justifyContent: 'space-evenly',
-  },
-  photo: {
-    width: 100,
-    height: 100,
-    borderBottomLeftRadius: 8,
-    borderTopLeftRadius: 8,
   },
   title: {
     fontSize: 14,
@@ -101,5 +107,3 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
 });
-
-export default BusinessListView;

@@ -1,8 +1,6 @@
 import React from 'react';
-import BusinessListView from './BusinessListView';
+import { BusinessListView } from './BusinessListView';
 
-const BusinessListScreen = () => {
+export const BusinessListScreen = () => {
   return <BusinessListView />;
 };
-
-export default BusinessListScreen;
