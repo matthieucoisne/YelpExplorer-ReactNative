@@ -1,5 +1,5 @@
 import { ApolloProvider } from '@apollo/client';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, RouteProp } from '@react-navigation/native';
 import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
 import { apolloClient } from './data/graphql/client';
@@ -10,7 +10,8 @@ type RootStackParamList = {
   BusinessList: undefined;
   BusinessDetails: { businessId: string };
 };
-export type BusinessDetailsScreenProp = StackNavigationProp<RootStackParamList, 'BusinessDetails'>;
+export type BusinessDetailsNavigationProp = StackNavigationProp<RootStackParamList, 'BusinessDetails'>;
+export type BusinessDetailsRouteProp = RouteProp<RootStackParamList, 'BusinessDetails'>;
 
 const Stack = createStackNavigator<RootStackParamList>();
 

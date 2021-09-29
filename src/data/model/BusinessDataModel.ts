@@ -1,11 +1,13 @@
 import { BusinessDomainModel } from '../../domain/model/BusinessDomainModel';
 
 export interface BusinessListResponse {
-  search: SearchDataModel;
+  search: {
+    business: BusinessDataModel[];
+  };
 }
 
-interface SearchDataModel {
-  business: BusinessDataModel[];
+export interface BusinessDetailsResponse {
+  business: BusinessDataModel;
 }
 
 export interface BusinessDataModel {
@@ -44,4 +46,18 @@ export const toDomainModels = (businessDataModels: BusinessDataModel[]): Busines
       // hours:
     };
   });
+};
+
+export const toDomainModel = (businessDataModel: BusinessDataModel): BusinessDomainModel => {
+  return {
+    id: businessDataModel.id,
+    name: businessDataModel.name,
+    imageUrl: businessDataModel.photos[0],
+    reviewCount: businessDataModel.review_count,
+    categories: businessDataModel.categories.map((category: CategoryDataModel) => category.title),
+    rating: businessDataModel.rating,
+    price: businessDataModel.price ?? '',
+    address: `${businessDataModel.location.address1}, ${businessDataModel.location.city}`,
+    // hours:
+  };
 };

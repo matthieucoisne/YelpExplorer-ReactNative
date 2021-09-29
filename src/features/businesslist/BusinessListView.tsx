@@ -10,11 +10,11 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { BusinessDetailsScreenProp } from '../../App';
+import { BusinessDetailsNavigationProp } from '../../App';
 import { BusinessUiModel } from './BusinessUiModel';
 import { useBusinessList } from './useBusinessList';
 
-export const BusinessListView: React.FC = () => {
+export const BusinessListView = () => {
   const { state } = useBusinessList('Sushi', 'Montreal', 'price', 20);
 
   return (
@@ -37,7 +37,7 @@ export const BusinessListView: React.FC = () => {
 };
 
 const BusinessRow = ({ business }: { business: BusinessUiModel }) => {
-  const navigation = useNavigation<BusinessDetailsScreenProp>();
+  const navigation = useNavigation<BusinessDetailsNavigationProp>();
 
   return (
     <TouchableOpacity
