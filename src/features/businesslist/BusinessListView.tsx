@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { businessDetailsScreenProp } from '../../App';
+import { BusinessDetailsScreenProp } from '../../App';
 import { BusinessUiModel } from './BusinessUiModel';
 import { useBusinessList } from './useBusinessList';
 
@@ -37,12 +37,12 @@ export const BusinessListView: React.FC = () => {
 };
 
 const BusinessRow = ({ business }: { business: BusinessUiModel }) => {
-  const navigationProp = useNavigation<businessDetailsScreenProp>();
+  const navigation = useNavigation<BusinessDetailsScreenProp>();
 
   return (
     <TouchableOpacity
       onPress={() => {
-        navigationProp.navigation.navigate('BusinessDetails', {
+        navigation.navigate('BusinessDetails', {
           businessId: business.id,
         });
       }}
