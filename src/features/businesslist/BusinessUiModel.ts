@@ -12,18 +12,15 @@ export interface BusinessUiModel {
 }
 
 export const toUiModels = (businesses: BusinessDomainModel[]): BusinessUiModel[] => {
-  return businesses.map((businessDomainModel: BusinessDomainModel, index: number) => {
+  return businesses.map((business: BusinessDomainModel, index: number) => {
     return {
-      id: businessDomainModel.id,
-      name: `${index + 1}. ${businessDomainModel.name.toUpperCase()}`,
-      imageUrl: businessDomainModel.imageUrl,
-      ratingImage: BusinessHelper.getRatingImage(businessDomainModel.rating),
-      reviewCount: `${businessDomainModel.reviewCount} reviews`,
-      address: businessDomainModel.address,
-      priceAndCategories: BusinessHelper.formatPriceAndCategories(
-        businessDomainModel.price,
-        businessDomainModel.categories,
-      ),
+      id: business.id,
+      name: `${index + 1}. ${business.name.toUpperCase()}`,
+      imageUrl: business.imageUrl,
+      ratingImage: BusinessHelper.getRatingImage(business.rating),
+      reviewCount: `${business.reviewCount} reviews`,
+      address: business.address,
+      priceAndCategories: BusinessHelper.formatPriceAndCategories(business.price, business.categories),
     };
   });
 };
