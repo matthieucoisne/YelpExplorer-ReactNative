@@ -1,7 +1,7 @@
 import { useEffect, useReducer } from 'react';
 import { useBusinessListQuery } from '../../domain/hook/useBusinessListQuery';
 import { BusinessDomainModel } from '../../domain/model/BusinessDomainModel';
-import { BusinessUiModel, toUiModels } from './BusinessUiModel';
+import { BusinessUiModel, toUiModels } from './BusinessListUiModel';
 
 export interface UseBusinessListHook {
   state: State;

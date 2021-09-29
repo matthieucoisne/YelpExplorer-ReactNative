@@ -1,7 +1,7 @@
 import { BusinessDomainModel } from '../../domain/model/BusinessDomainModel';
 import * as BusinessHelper from '../helper/BusinessHelper';
 
-export interface BusinessUiModel {
+export interface BusinessListUiModel {
   id: string;
   name: string;
   imageUrl: string;
@@ -11,7 +11,7 @@ export interface BusinessUiModel {
   priceAndCategories: string;
 }
 
-export const toUiModels = (businesses: BusinessDomainModel[]): BusinessUiModel[] => {
+export const toUiModels = (businesses: BusinessDomainModel[]): BusinessListUiModel[] => {
   return businesses.map((business: BusinessDomainModel, index: number) => {
     return {
       id: business.id,

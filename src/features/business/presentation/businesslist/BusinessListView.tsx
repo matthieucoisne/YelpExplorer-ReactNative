@@ -11,7 +11,7 @@ import {
   View,
 } from 'react-native';
 import { BusinessDetailsNavigationProp } from '../../../../App';
-import { BusinessUiModel } from './BusinessUiModel';
+import { BusinessListUiModel } from './BusinessListUiModel';
 import { useBusinessList } from './useBusinessList';
 
 export const BusinessListView = () => {
@@ -29,14 +29,14 @@ export const BusinessListView = () => {
           renderItem={({ item }) => {
             return <BusinessRow business={item} />;
           }}
-          keyExtractor={(business: BusinessUiModel) => business.id}
+          keyExtractor={(business: BusinessListUiModel) => business.id}
         />
       )}
     </SafeAreaView>
   );
 };
 
-const BusinessRow = ({ business }: { business: BusinessUiModel }) => {
+const BusinessRow = ({ business }: { business: BusinessListUiModel }) => {
   const navigation = useNavigation<BusinessDetailsNavigationProp>();
 
   return (

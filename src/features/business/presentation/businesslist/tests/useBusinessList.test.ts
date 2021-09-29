@@ -2,7 +2,7 @@ import { ApolloError } from '@apollo/client';
 import { renderHook } from '@testing-library/react-hooks';
 import * as useBusinessListQuery from '../../../domain/hook/useBusinessListQuery';
 import { BusinessDomainModel } from '../../../domain/model/BusinessDomainModel';
-import { BusinessUiModel } from '../BusinessUiModel';
+import { BusinessListUiModel } from '../BusinessListUiModel';
 import { useBusinessList } from '../useBusinessList';
 
 describe('useBusinessList', () => {
@@ -25,7 +25,7 @@ describe('useBusinessList', () => {
       rating: 4.5,
       reviewCount: 1337,
     };
-    const expectedBusiness: BusinessUiModel = {
+    const expectedBusiness: BusinessListUiModel = {
       id: 'id',
       name: '1. NAME',
       address: 'address',
