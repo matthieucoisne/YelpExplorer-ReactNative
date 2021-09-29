@@ -1,7 +1,7 @@
 import { ApolloError, useQuery } from '@apollo/client';
 import { useMemo } from 'react';
+import { BusinessListGraphQLResponse, toDomainModels } from '../../data/graphql/model/BusinessGraphQLModel';
 import { businessListQuery } from '../../data/graphql/query/BusinessListQuery';
-import { BusinessListResponse, toDomainModels } from '../../data/model/BusinessDataModel';
 import { BusinessDomainModel } from '../model/BusinessDomainModel';
 
 export interface UseBusinessListQueryHook {
@@ -16,7 +16,7 @@ export const useBusinessListQuery = (
   sortBy: String,
   limit: number,
 ): UseBusinessListQueryHook => {
-  const { data, loading, error } = useQuery<BusinessListResponse>(businessListQuery, {
+  const { data, loading, error } = useQuery<BusinessListGraphQLResponse>(businessListQuery, {
     variables: {
       term,
       location,

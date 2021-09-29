@@ -1,6 +1,6 @@
 import { ApolloError, useQuery } from '@apollo/client';
 import { renderHook } from '@testing-library/react-hooks';
-import { BusinessDataModel } from '../../../data/model/BusinessDataModel';
+import { BusinessGraphQLModel } from '../../../data/graphql/model/BusinessGraphQLModel';
 import { BusinessDomainModel } from '../../model/BusinessDomainModel';
 import { useBusinessListQuery } from '../useBusinessListQuery';
 
@@ -23,7 +23,7 @@ describe('useBusinessListQueryTests', () => {
 
   it('success', async () => {
     // Given
-    const business: BusinessDataModel = {
+    const business: BusinessGraphQLModel = {
       id: 'id',
       name: 'name',
       location: {

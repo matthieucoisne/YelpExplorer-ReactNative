@@ -2,9 +2,9 @@ import { ApolloProvider } from '@apollo/client';
 import { NavigationContainer, RouteProp } from '@react-navigation/native';
 import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
-import { apolloClient } from './data/graphql/client';
-import { BusinessDetailsScreen } from './features/businessdetails/BusinessDetailsScreen';
-import { BusinessListScreen } from './features/businesslist/BusinessListScreen';
+import { apolloClient } from './core/GraphQLClient';
+import { BusinessDetailsScreen } from './features/business/presentation/businessdetails/BusinessDetailsScreen';
+import { BusinessListScreen } from './features/business/presentation/businesslist/BusinessListScreen';
 
 type RootStackParamList = {
   BusinessList: undefined;

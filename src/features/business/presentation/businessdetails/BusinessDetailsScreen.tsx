@@ -1,5 +1,5 @@
 import React from 'react';
-import { BusinessDetailsRouteProp } from '../../App';
+import { BusinessDetailsRouteProp } from '../../../../App';
 import { BusinessDetailsView } from './BusinessDetailsView';
 
 export const BusinessDetailsScreen = ({ route }: { route: BusinessDetailsRouteProp }) => {

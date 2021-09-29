@@ -1,45 +1,45 @@
-import { BusinessDomainModel } from '../../domain/model/BusinessDomainModel';
+import { BusinessDomainModel } from '../../../domain/model/BusinessDomainModel';
 
-export interface BusinessListResponse {
+export interface BusinessListGraphQLResponse {
   search: {
-    business: BusinessDataModel[];
+    business: BusinessGraphQLModel[];
   };
 }
 
-export interface BusinessDetailsResponse {
-  business: BusinessDataModel;
+export interface BusinessDetailsGraphQLResponse {
+  business: BusinessGraphQLModel;
 }
 
-export interface BusinessDataModel {
+export interface BusinessGraphQLModel {
   id: string;
   name: string;
   photos: string[];
   review_count: number;
-  categories: CategoryDataModel[];
+  categories: CategoryGraphQLModel[];
   rating: number;
   price: string;
-  location: LocationDataModel;
+  location: LocationGraphQLModel;
   // hours: [];
   // reviews: [];
 }
 
-interface CategoryDataModel {
+interface CategoryGraphQLModel {
   title: string;
 }
 
-interface LocationDataModel {
+interface LocationGraphQLModel {
   address1: string;
   city: string;
 }
 
-export const toDomainModels = (businessDataModels: BusinessDataModel[]): BusinessDomainModel[] => {
-  return businessDataModels.map((businessDataModel: BusinessDataModel) => {
+export const toDomainModels = (businessDataModels: BusinessGraphQLModel[]): BusinessDomainModel[] => {
+  return businessDataModels.map((businessDataModel: BusinessGraphQLModel) => {
     return {
       id: businessDataModel.id,
       name: businessDataModel.name,
       imageUrl: businessDataModel.photos[0],
       reviewCount: businessDataModel.review_count,
-      categories: businessDataModel.categories.map((category: CategoryDataModel) => category.title),
+      categories: businessDataModel.categories.map((category: CategoryGraphQLModel) => category.title),
       rating: businessDataModel.rating,
       price: businessDataModel.price ?? '',
       address: `${businessDataModel.location.address1}, ${businessDataModel.location.city}`,
@@ -48,13 +48,13 @@ export const toDomainModels = (businessDataModels: BusinessDataModel[]): Busines
   });
 };
 
-export const toDomainModel = (businessDataModel: BusinessDataModel): BusinessDomainModel => {
+export const toDomainModel = (businessDataModel: BusinessGraphQLModel): BusinessDomainModel => {
   return {
     id: businessDataModel.id,
     name: businessDataModel.name,
     imageUrl: businessDataModel.photos[0],
     reviewCount: businessDataModel.review_count,
-    categories: businessDataModel.categories.map((category: CategoryDataModel) => category.title),
+    categories: businessDataModel.categories.map((category: CategoryGraphQLModel) => category.title),
     rating: businessDataModel.rating,
     price: businessDataModel.price ?? '',
     address: `${businessDataModel.location.address1}, ${businessDataModel.location.city}`,

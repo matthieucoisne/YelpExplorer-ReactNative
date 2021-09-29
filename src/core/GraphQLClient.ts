@@ -6,7 +6,7 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-  const appConfig = require('../../../config/app_config.json');
+  const appConfig = require('../../config/app_config.json');
 
   return {
     headers: {
