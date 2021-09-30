@@ -1,6 +1,6 @@
 import { ApolloError, useQuery } from '@apollo/client';
 import { useMemo } from 'react';
-import { toDomainModels } from '../../data/graphql/mapper/BusinessGraphQLMapper';
+import * as BusinessGraphQLMapper from '../../data/graphql/mapper/BusinessGraphQLMapper';
 import { BusinessListGraphQLResponse } from '../../data/graphql/model/BusinessGraphQLModel';
 import { businessListQuery } from '../../data/graphql/query/BusinessListQuery';
 import { Business } from '../model/Business';
@@ -27,7 +27,7 @@ export const useBusinessListQuery = (
   });
 
   const businesses: Business[] = useMemo(() => {
-    return toDomainModels(data?.search?.business ?? []);
+    return BusinessGraphQLMapper.toDomainModels(data?.search?.business ?? []);
   }, [data]);
 
   return { businesses, loading, error };

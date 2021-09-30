@@ -1,7 +1,8 @@
 import { useEffect, useReducer } from 'react';
 import { useBusinessListQuery } from '../../domain/hook/useBusinessListQuery';
 import { Business } from '../../domain/model/Business';
-import { BusinessListUiModel, toUiModels } from './BusinessListUiModel';
+import * as BusinessListMapper from './BusinessListMapper';
+import { BusinessListUiModel } from './BusinessListUiModel';
 
 export interface UseBusinessListHook {
   state: State;
@@ -48,7 +49,7 @@ const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         isLoading: false,
-        businesses: toUiModels(action.businesses),
+        businesses: BusinessListMapper.toUiModels(action.businesses),
       };
     case ActionType.ERROR:
       return { ...state, isLoading: false, error: action.error };

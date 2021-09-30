@@ -1,6 +1,6 @@
 import { ApolloError, useQuery } from '@apollo/client';
 import { useMemo } from 'react';
-import { toDomainModel } from '../../data/graphql/mapper/BusinessGraphQLMapper';
+import * as BusinessGraphQLMapper from '../../data/graphql/mapper/BusinessGraphQLMapper';
 import { BusinessDetailsGraphQLResponse } from '../../data/graphql/model/BusinessGraphQLModel';
 import { businessDetailsQuery } from '../../data/graphql/query/BusinessDetailsQuery';
 import { Business } from '../model/Business';
@@ -19,7 +19,7 @@ export const useBusinessDetailsQuery = (businessId: String): UseBusinessDetailsQ
   });
 
   const business = useMemo(() => {
-    return data ? toDomainModel(data.business) : undefined;
+    return data ? BusinessGraphQLMapper.toDomainModel(data.business) : undefined;
   }, [data]);
 
   return { business, loading, error };
