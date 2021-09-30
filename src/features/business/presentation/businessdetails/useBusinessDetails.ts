@@ -1,7 +1,8 @@
 import { useEffect, useReducer } from 'react';
 import { useBusinessDetailsQuery } from '../../domain/hook/useBusinessDetailsQuery';
-import { BusinessDomainModel } from '../../domain/model/BusinessDomainModel';
-import { BusinessDetailsUiModel, toUiModel } from './BusinessDetailsUiModel';
+import { Business } from '../../domain/model/Business';
+import * as BusinessDetailsMapper from './BusinessDetailsMapper';
+import { BusinessDetailsUiModel } from './BusinessDetailsUiModel';
 
 export interface UseBusinessDetailsHook {
   state: State;
@@ -25,7 +26,7 @@ enum ActionType {
 
 interface BusinessDetailsSuccess {
   type: ActionType.SUCCESS;
-  business: BusinessDomainModel;
+  business: Business;
 }
 
 interface BusinessDetailsLoading {
@@ -47,7 +48,7 @@ const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         isLoading: false,
-        business: toUiModel(action.business),
+        business: BusinessDetailsMapper.toUiModel(action.business),
       };
     case ActionType.ERROR:
       return { ...state, isLoading: false, error: action.error };

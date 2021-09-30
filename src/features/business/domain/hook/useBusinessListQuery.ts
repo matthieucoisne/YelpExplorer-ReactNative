@@ -1,11 +1,12 @@
 import { ApolloError, useQuery } from '@apollo/client';
 import { useMemo } from 'react';
-import { BusinessListGraphQLResponse, toDomainModels } from '../../data/graphql/model/BusinessGraphQLModel';
+import * as BusinessGraphQLMapper from '../../data/graphql/mapper/BusinessGraphQLMapper';
+import { BusinessListGraphQLResponse } from '../../data/graphql/model/BusinessGraphQLModel';
 import { businessListQuery } from '../../data/graphql/query/BusinessListQuery';
-import { BusinessDomainModel } from '../model/BusinessDomainModel';
+import { Business } from '../model/Business';
 
 export interface UseBusinessListQueryHook {
-  businesses: BusinessDomainModel[];
+  businesses: Business[];
   loading: boolean;
   error: ApolloError | undefined;
 }
@@ -25,8 +26,8 @@ export const useBusinessListQuery = (
     },
   });
 
-  const businesses: BusinessDomainModel[] = useMemo(() => {
-    return toDomainModels(data?.search?.business ?? []);
+  const businesses: Business[] = useMemo(() => {
+    return BusinessGraphQLMapper.toDomainModels(data?.search?.business ?? []);
   }, [data]);
 
   return { businesses, loading, error };

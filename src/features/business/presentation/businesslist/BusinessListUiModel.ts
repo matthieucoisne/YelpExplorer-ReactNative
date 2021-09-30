@@ -1,6 +1,3 @@
-import { BusinessDomainModel } from '../../domain/model/BusinessDomainModel';
-import * as BusinessHelper from '../helper/BusinessHelper';
-
 export interface BusinessListUiModel {
   id: string;
   name: string;
@@ -10,17 +7,3 @@ export interface BusinessListUiModel {
   address: string;
   priceAndCategories: string;
 }
-
-export const toUiModels = (businesses: BusinessDomainModel[]): BusinessListUiModel[] => {
-  return businesses.map((business: BusinessDomainModel, index: number) => {
-    return {
-      id: business.id,
-      name: `${index + 1}. ${business.name.toUpperCase()}`,
-      imageUrl: business.imageUrl,
-      ratingImage: BusinessHelper.getRatingImage(business.rating),
-      reviewCount: `${business.reviewCount} reviews`,
-      address: business.address,
-      priceAndCategories: BusinessHelper.formatPriceAndCategories(business.price, business.categories),
-    };
-  });
-};
