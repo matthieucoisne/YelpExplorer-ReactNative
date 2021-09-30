@@ -38,6 +38,7 @@ describe('useBusinessListQueryTests', () => {
       review_count: 1337,
       reviews: [
         {
+          id: 'id',
           user: {
             name: 'name',
             image_url: 'http://',
@@ -59,6 +60,7 @@ describe('useBusinessListQueryTests', () => {
       reviewCount: 1337,
       reviews: [
         {
+          id: 'id',
           user: {
             name: 'name',
             imageUrl: 'http://',

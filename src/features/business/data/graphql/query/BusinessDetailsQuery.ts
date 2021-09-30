@@ -25,6 +25,7 @@ export const businessDetailsQuery = gql`
         }
       }
       reviews {
+        id
         user {
           name
           image_url

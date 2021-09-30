@@ -16,6 +16,7 @@ export interface BusinessDetailsUiModel {
 }
 
 export interface ReviewUiModel {
+  id: string;
   user: UserUiModel;
   text: string;
   ratingImage: any;
@@ -44,6 +45,7 @@ export const toUiModel = (business: Business): BusinessDetailsUiModel => {
 const toReviewUiModels = (reviews: Review[]): ReviewUiModel[] => {
   return reviews.map(review => {
     return {
+      id: review.id,
       user: toUserUiModel(review.user),
       text: review.text,
       ratingImage: BusinessHelper.getRatingImage(review.rating),

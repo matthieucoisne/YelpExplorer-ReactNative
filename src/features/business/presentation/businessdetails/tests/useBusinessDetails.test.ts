@@ -23,6 +23,7 @@ describe('useBusinessList', () => {
       reviewCount: 1337,
       reviews: [
         {
+          id: 'id',
           user: {
             name: 'name',
             imageUrl: 'http://',
@@ -45,6 +46,7 @@ describe('useBusinessList', () => {
       },
       reviews: [
         {
+          id: 'id',
           user: {
             name: 'name',
             imageUrl: 'http://',

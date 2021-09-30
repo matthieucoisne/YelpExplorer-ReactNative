@@ -15,6 +15,7 @@ export const toDomainModel = (business: BusinessGraphQLModel): Business => {
 
   const reviews: Review[] | undefined = business.reviews?.map(review => {
     return {
+      id: review.id,
       user: {
         name: review.user.name,
         imageUrl: review.user.image_url ?? '',
