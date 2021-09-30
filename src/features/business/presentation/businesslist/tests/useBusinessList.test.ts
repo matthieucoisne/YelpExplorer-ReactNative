@@ -1,7 +1,7 @@
 import { ApolloError } from '@apollo/client';
 import { renderHook } from '@testing-library/react-hooks';
 import * as useBusinessListQuery from '../../../domain/hook/useBusinessListQuery';
-import { BusinessDomainModel } from '../../../domain/model/BusinessDomainModel';
+import { Business } from '../../../domain/model/Business';
 import { BusinessListUiModel } from '../BusinessListUiModel';
 import { useBusinessList } from '../useBusinessList';
 
@@ -15,7 +15,7 @@ describe('useBusinessList', () => {
 
   it('success', async () => {
     // Given
-    const business: BusinessDomainModel = {
+    const business: Business = {
       id: 'id',
       name: 'name',
       address: 'address',
@@ -24,6 +24,7 @@ describe('useBusinessList', () => {
       price: '$$',
       rating: 4.5,
       reviewCount: 1337,
+      reviews: [],
     };
     const expectedBusiness: BusinessListUiModel = {
       id: 'id',

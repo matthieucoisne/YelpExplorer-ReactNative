@@ -1,7 +1,7 @@
 import { ApolloError } from '@apollo/client';
 import { renderHook } from '@testing-library/react-hooks';
 import * as useBusinessDetailsQuery from '../../../domain/hook/useBusinessDetailsQuery';
-import { BusinessDomainModel } from '../../../domain/model/Business';
+import { Business } from '../../../domain/model/Business';
 import { BusinessDetailsUiModel } from '../BusinessDetailsUiModel';
 import { useBusinessDetails } from '../useBusinessDetails';
 
@@ -12,7 +12,7 @@ describe('useBusinessList', () => {
 
   it('success', async () => {
     // Given
-    const business: BusinessDomainModel = {
+    const business: Business = {
       id: 'id',
       name: 'name',
       address: 'address',
@@ -21,6 +21,17 @@ describe('useBusinessList', () => {
       price: '$$',
       rating: 4.5,
       reviewCount: 1337,
+      reviews: [
+        {
+          user: {
+            name: 'name',
+            imageUrl: 'http://',
+          },
+          text: 'text',
+          timeCreated: '01-01-2020',
+          rating: 5,
+        },
+      ],
     };
     const expectedBusiness: BusinessDetailsUiModel = {
       id: 'id',
@@ -32,6 +43,19 @@ describe('useBusinessList', () => {
       ratingImage: {
         testUri: '../../../src/assets/stars_small_4_half.png',
       },
+      reviews: [
+        {
+          user: {
+            name: 'name',
+            imageUrl: 'http://',
+          },
+          text: 'text',
+          timeCreated: '01-01-2020',
+          ratingImage: {
+            testUri: '../../../src/assets/stars_small_5.png',
+          },
+        },
+      ],
     };
     spy.mockReturnValue({
       business: business,

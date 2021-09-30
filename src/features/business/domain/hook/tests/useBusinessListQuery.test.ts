@@ -1,7 +1,7 @@
 import { ApolloError, useQuery } from '@apollo/client';
 import { renderHook } from '@testing-library/react-hooks';
 import { BusinessGraphQLModel } from '../../../data/graphql/model/BusinessGraphQLModel';
-import { BusinessDomainModel } from '../../model/BusinessDomainModel';
+import { Business } from '../../model/Business';
 import { useBusinessListQuery } from '../useBusinessListQuery';
 
 jest.mock('@apollo/client', () => {
@@ -40,7 +40,7 @@ describe('useBusinessListQueryTests', () => {
       rating: 4.5,
       review_count: 1337,
     };
-    const expectedBusiness: BusinessDomainModel = {
+    const expectedBusiness: Business = {
       id: 'id',
       name: 'name',
       address: 'address1, city',
@@ -49,6 +49,7 @@ describe('useBusinessListQueryTests', () => {
       price: '$$',
       rating: 4.5,
       reviewCount: 1337,
+      reviews: [],
     };
     mockUseQuery.mockImplementation(() => ({
       data: {
