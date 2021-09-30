@@ -1,7 +1,7 @@
 import { useEffect, useReducer } from 'react';
 import { useBusinessListQuery } from '../../domain/hook/useBusinessListQuery';
-import { BusinessDomainModel } from '../../domain/model/BusinessDomainModel';
-import { BusinessUiModel, toUiModels } from './BusinessListUiModel';
+import { Business } from '../../domain/model/Business';
+import { BusinessListUiModel, toUiModels } from './BusinessListUiModel';
 
 export interface UseBusinessListHook {
   state: State;
@@ -9,7 +9,7 @@ export interface UseBusinessListHook {
 
 interface State {
   isLoading: boolean;
-  businesses: BusinessUiModel[];
+  businesses: BusinessListUiModel[];
   error?: Error;
 }
 
@@ -26,7 +26,7 @@ enum ActionType {
 
 interface BusinessListSuccess {
   type: ActionType.SUCCESS;
-  businesses: BusinessDomainModel[];
+  businesses: Business[];
 }
 
 interface BusinessListLoading {

@@ -1,4 +1,6 @@
-export interface BusinessDomainModel {
+import { Review } from './Review';
+
+export interface Business {
   id: string;
   name: string;
   imageUrl: string;
@@ -8,5 +10,5 @@ export interface BusinessDomainModel {
   price: string;
   categories: string[];
   // hours: Map<number, string[]>;
-  // reviews: Review[];
+  reviews: Review[];
 }

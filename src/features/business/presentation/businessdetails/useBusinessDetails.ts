@@ -1,6 +1,6 @@
 import { useEffect, useReducer } from 'react';
 import { useBusinessDetailsQuery } from '../../domain/hook/useBusinessDetailsQuery';
-import { BusinessDomainModel } from '../../domain/model/BusinessDomainModel';
+import { Business } from '../../domain/model/Business';
 import { BusinessDetailsUiModel, toUiModel } from './BusinessDetailsUiModel';
 
 export interface UseBusinessDetailsHook {
@@ -25,7 +25,7 @@ enum ActionType {
 
 interface BusinessDetailsSuccess {
   type: ActionType.SUCCESS;
-  business: BusinessDomainModel;
+  business: Business;
 }
 
 interface BusinessDetailsLoading {

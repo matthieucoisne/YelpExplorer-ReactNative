@@ -1,4 +1,4 @@
-import { BusinessDomainModel } from '../../../domain/model/BusinessDomainModel';
+import { ReviewGraphQLModel } from './ReviewGraphQLModel';
 
 export interface BusinessListGraphQLResponse {
   search: {
@@ -20,7 +20,7 @@ export interface BusinessGraphQLModel {
   price: string;
   location: LocationGraphQLModel;
   // hours: [];
-  // reviews: [];
+  reviews?: ReviewGraphQLModel[];
 }
 
 interface CategoryGraphQLModel {
@@ -31,33 +31,3 @@ interface LocationGraphQLModel {
   address1: string;
   city: string;
 }
-
-export const toDomainModels = (businessDataModels: BusinessGraphQLModel[]): BusinessDomainModel[] => {
-  return businessDataModels.map((businessDataModel: BusinessGraphQLModel) => {
-    return {
-      id: businessDataModel.id,
-      name: businessDataModel.name,
-      imageUrl: businessDataModel.photos[0],
-      reviewCount: businessDataModel.review_count,
-      categories: businessDataModel.categories.map((category: CategoryGraphQLModel) => category.title),
-      rating: businessDataModel.rating,
-      price: businessDataModel.price ?? '',
-      address: `${businessDataModel.location.address1}, ${businessDataModel.location.city}`,
-      // hours:
-    };
-  });
-};
-
-export const toDomainModel = (businessDataModel: BusinessGraphQLModel): BusinessDomainModel => {
-  return {
-    id: businessDataModel.id,
-    name: businessDataModel.name,
-    imageUrl: businessDataModel.photos[0],
-    reviewCount: businessDataModel.review_count,
-    categories: businessDataModel.categories.map((category: CategoryGraphQLModel) => category.title),
-    rating: businessDataModel.rating,
-    price: businessDataModel.price ?? '',
-    address: `${businessDataModel.location.address1}, ${businessDataModel.location.city}`,
-    // hours:
-  };
-};

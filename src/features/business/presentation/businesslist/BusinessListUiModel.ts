@@ -1,4 +1,4 @@
-import { BusinessDomainModel } from '../../domain/model/BusinessDomainModel';
+import { Business } from '../../domain/model/Business';
 import * as BusinessHelper from '../helper/BusinessHelper';
 
 export interface BusinessListUiModel {
@@ -11,8 +11,8 @@ export interface BusinessListUiModel {
   priceAndCategories: string;
 }
 
-export const toUiModels = (businesses: BusinessDomainModel[]): BusinessListUiModel[] => {
-  return businesses.map((business: BusinessDomainModel, index: number) => {
+export const toUiModels = (businesses: Business[]): BusinessListUiModel[] => {
+  return businesses.map((business: Business, index: number) => {
     return {
       id: business.id,
       name: `${index + 1}. ${business.name.toUpperCase()}`,
