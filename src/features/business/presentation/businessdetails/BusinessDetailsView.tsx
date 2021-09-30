@@ -1,6 +1,6 @@
 import React from 'react';
-import { ActivityIndicator, Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import { BusinessDetailsUiModel } from './BusinessDetailsUiModel';
+import { ActivityIndicator, FlatList, Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { BusinessDetailsUiModel, ReviewUiModel } from './BusinessDetailsUiModel';
 import { useBusinessDetails } from './useBusinessDetails';
 
 export const BusinessDetailsView = ({ businessId }: { businessId: string }) => {
@@ -28,6 +28,28 @@ const BusinessDetails = ({ business }: { business: BusinessDetailsUiModel }) => 
           {business.address}
         </Text>
       </View>
+
+      <FlatList
+        horizontal={false}
+        showsHorizontalScrollIndicator={true}
+        data={business.reviews}
+        renderItem={({ item }) => {
+          return <ReviewRow review={item} />;
+        }}
+        keyExtractor={(review: ReviewUiModel) => review.id}
+      />
+    </>
+  );
+};
+
+const ReviewRow = ({ review }: { review: ReviewUiModel }) => {
+  return (
+    <>
+      <Text>{review.user.name}</Text>
+      <Image style={styles.photo} source={{ uri: review.user.imageUrl }} />
+      <Image style={styles.ratingImage} source={review.ratingImage} />
+      <Text>{review.text}</Text>
+      <Text>{review.timeCreated}</Text>
     </>
   );
 };
