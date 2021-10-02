@@ -1,6 +1,6 @@
 import { ApolloError } from '@apollo/client';
 import { renderHook } from '@testing-library/react-hooks';
-import * as useBusinessListQuery from '../../../domain/hook/useBusinessListQuery';
+import * as useBusinessListQuery from '../../../data/graphql/hook/useBusinessListQuery';
 import { Business } from '../../../domain/model/Business';
 import { BusinessListUiModel } from '../BusinessListUiModel';
 import { useBusinessList } from '../useBusinessList';
