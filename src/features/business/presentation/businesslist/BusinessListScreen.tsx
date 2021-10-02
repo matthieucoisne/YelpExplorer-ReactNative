@@ -46,7 +46,7 @@ const Business = ({ business }: { business: BusinessListUiModel }) => {
       }}
     >
       <View style={styles.businessCard}>
-        <Image style={styles.businessPhoto} source={{ uri: business.imageUrl }} />
+        <Image style={styles.businessPhoto} source={{ uri: business.photoUrl }} />
         <View style={styles.businessDetails}>
           <Text style={styles.businessName}>{business.name}</Text>
           <View style={styles.ratingAndDate}>

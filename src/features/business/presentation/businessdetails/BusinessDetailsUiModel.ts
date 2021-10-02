@@ -1,7 +1,7 @@
 export interface BusinessDetailsUiModel {
   id: string;
   name: string;
-  imageUrl: string;
+  photoUrl: string;
   ratingImage: any;
   reviewCount: string;
   address: string;
@@ -20,5 +20,5 @@ export interface ReviewUiModel {
 
 export interface UserUiModel {
   name: string;
-  imageUrl: string;
+  photoUrl: string;
 }

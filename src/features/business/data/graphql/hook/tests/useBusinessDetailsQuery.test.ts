@@ -54,7 +54,7 @@ describe('useBusinessListQueryTests', () => {
       name: 'name',
       address: 'address1, city',
       categories: ['category#1'],
-      imageUrl: 'http://',
+      photoUrl: 'http://',
       price: '$$',
       rating: 4.5,
       reviewCount: 1337,
@@ -63,7 +63,7 @@ describe('useBusinessListQueryTests', () => {
           id: 'id',
           user: {
             name: 'name',
-            imageUrl: 'http://',
+            photoUrl: 'http://',
           },
           text: 'text',
           timeCreated: '01-01-2020',

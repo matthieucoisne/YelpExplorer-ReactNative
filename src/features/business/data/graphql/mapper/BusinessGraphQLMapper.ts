@@ -18,7 +18,7 @@ export const toDomainModel = (business: BusinessGraphQLModel): Business => {
       id: review.id,
       user: {
         name: review.user.name,
-        imageUrl: review.user.image_url ?? '',
+        photoUrl: review.user.image_url ?? '',
       },
       text: review.text,
       rating: review.rating,
@@ -29,7 +29,7 @@ export const toDomainModel = (business: BusinessGraphQLModel): Business => {
   return {
     id: business.id,
     name: business.name,
-    imageUrl: business.photos[0],
+    photoUrl: business.photos[0],
     reviewCount: business.review_count,
     categories: categories,
     rating: business.rating,

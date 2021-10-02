@@ -1,7 +1,7 @@
 export interface BusinessListUiModel {
   id: string;
   name: string;
-  imageUrl: string;
+  photoUrl: string;
   ratingImage: any;
   reviewCount: string;
   address: string;

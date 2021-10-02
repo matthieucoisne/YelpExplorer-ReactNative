@@ -3,7 +3,7 @@ import { Review } from './Review';
 export interface Business {
   id: string;
   name: string;
-  imageUrl: string;
+  photoUrl: string;
   rating: number;
   reviewCount: number;
   address: string;

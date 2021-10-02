@@ -29,7 +29,7 @@ export const BusinessDetailsScreen = ({ route }: { route: BusinessDetailsRoutePr
 const BusinessDetails = ({ business }: { business: BusinessDetailsUiModel }) => {
   return (
     <>
-      <Image style={styles.businessPhoto} source={{ uri: business.imageUrl }} />
+      <Image style={styles.businessPhoto} source={{ uri: business.photoUrl }} />
       <View style={styles.businessDetails}>
         <Text style={styles.businessName}>{business.name}</Text>
         <View style={styles.ratingAndDate}>
@@ -51,8 +51,7 @@ const Review = ({ review }: { review: ReviewUiModel }) => {
     <>
       <View style={styles.reviewCard}>
         <View style={styles.reviewUser}>
-          {/* TODO: add fallback image */}
-          <Image style={styles.reviewUserImage} source={{ uri: review.user.imageUrl }} />
+          <Image style={styles.reviewUserImage} source={{ uri: review.user.photoUrl }} />
           <View style={styles.reviewUserAndRating}>
             <Text style={styles.reviewUserName}>{review.user.name}</Text>
             <View style={styles.ratingAndDate}>
@@ -73,8 +72,6 @@ const styles = StyleSheet.create({
   },
   businessPhoto: {
     height: 200,
-    borderBottomLeftRadius: 8,
-    borderTopLeftRadius: 8,
   },
   businessDetails: {
     flexDirection: 'column',

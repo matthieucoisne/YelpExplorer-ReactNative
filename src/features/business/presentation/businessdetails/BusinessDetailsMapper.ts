@@ -8,7 +8,7 @@ export const toUiModel = (business: Business): BusinessDetailsUiModel => {
   return {
     id: business.id,
     name: business.name.toUpperCase(),
-    imageUrl: business.imageUrl,
+    photoUrl: business.photoUrl,
     ratingImage: BusinessHelper.getRatingImage(business.rating),
     reviewCount: `${business.reviewCount} reviews`,
     address: business.address,
@@ -33,6 +33,6 @@ const toReviewUiModels = (reviews: Review[]): ReviewUiModel[] => {
 const toUserUiModel = (user: User): UserUiModel => {
   return {
     name: user.name,
-    imageUrl: user.imageUrl,
+    photoUrl: user.photoUrl,
   };
 };

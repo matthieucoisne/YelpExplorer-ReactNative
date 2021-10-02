@@ -7,7 +7,7 @@ export const toUiModels = (businesses: Business[]): BusinessListUiModel[] => {
     return {
       id: business.id,
       name: `${index + 1}. ${business.name.toUpperCase()}`,
-      imageUrl: business.imageUrl,
+      photoUrl: business.photoUrl,
       ratingImage: BusinessHelper.getRatingImage(business.rating),
       reviewCount: `${business.reviewCount} reviews`,
       address: business.address,

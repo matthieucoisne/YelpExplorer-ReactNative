@@ -20,7 +20,7 @@ describe('useBusinessList', () => {
       name: 'name',
       address: 'address',
       categories: ['category#1'],
-      imageUrl: 'http://',
+      photoUrl: 'http://',
       price: '$$',
       rating: 4.5,
       reviewCount: 1337,
@@ -30,7 +30,7 @@ describe('useBusinessList', () => {
       id: 'id',
       name: '1. NAME',
       address: 'address',
-      imageUrl: 'http://',
+      photoUrl: 'http://',
       priceAndCategories: '$$  •  category#1',
       reviewCount: '1337 reviews',
       ratingImage: {

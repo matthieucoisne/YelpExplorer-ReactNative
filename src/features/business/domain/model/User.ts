@@ -1,4 +1,4 @@
 export interface User {
   name: string;
-  imageUrl: string;
+  photoUrl: string;
 }
