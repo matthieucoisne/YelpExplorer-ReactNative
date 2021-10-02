@@ -24,6 +24,7 @@ describe('useBusinessList', () => {
       price: '$$',
       rating: 4.5,
       reviewCount: 1337,
+      hours: new Map(),
       reviews: [],
     };
     const expectedBusiness: BusinessListUiModel = {

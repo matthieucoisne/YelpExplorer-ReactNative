@@ -6,7 +6,7 @@ export interface BusinessDetailsUiModel {
   reviewCount: string;
   address: string;
   priceAndCategories: string;
-  // hours
+  hours: string[][];
   reviews: ReviewUiModel[];
 }
 
