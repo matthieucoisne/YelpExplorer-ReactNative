@@ -1,7 +1,7 @@
 import { ApolloError, useQuery } from '@apollo/client';
 import { renderHook } from '@testing-library/react-hooks';
-import { BusinessGraphQLModel } from '../../../data/graphql/model/BusinessGraphQLModel';
-import { Business } from '../../model/Business';
+import { BusinessGraphQLModel } from '../../model/BusinessGraphQLModel';
+import { Business } from '../../../../domain/model/Business';
 import { useBusinessDetailsQuery } from '../useBusinessDetailsQuery';
 
 jest.mock('@apollo/client', () => {

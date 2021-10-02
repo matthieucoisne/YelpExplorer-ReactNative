@@ -1,5 +1,5 @@
 import { useEffect, useReducer } from 'react';
-import { useBusinessDetailsQuery } from '../../domain/hook/useBusinessDetailsQuery';
+import { useBusinessDetailsInteractor } from '../../domain/interactor/useBusinessDetailsInteractor';
 import { Business } from '../../domain/model/Business';
 import * as BusinessDetailsMapper from './BusinessDetailsMapper';
 import { BusinessDetailsUiModel } from './BusinessDetailsUiModel';
@@ -57,7 +57,7 @@ const reducer = (state: State, action: Action): State => {
 
 export const useBusinessDetails = (businessId: String): UseBusinessDetailsHook => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { business, loading, error } = useBusinessDetailsQuery(businessId);
+  const { business, loading, error } = useBusinessDetailsInteractor(businessId);
 
   useEffect(() => {
     if (loading) {

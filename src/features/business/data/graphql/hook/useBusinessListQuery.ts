@@ -1,14 +1,14 @@
-import { ApolloError, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { useMemo } from 'react';
-import * as BusinessGraphQLMapper from '../../data/graphql/mapper/BusinessGraphQLMapper';
-import { BusinessListGraphQLResponse } from '../../data/graphql/model/BusinessGraphQLModel';
-import { businessListQuery } from '../../data/graphql/query/BusinessListQuery';
-import { Business } from '../model/Business';
+import { Business } from '../../../domain/model/Business';
+import * as BusinessGraphQLMapper from '../mapper/BusinessGraphQLMapper';
+import { BusinessListGraphQLResponse } from '../model/BusinessGraphQLModel';
+import { businessListQuery } from '../query/BusinessListQuery';
 
 export interface UseBusinessListQueryHook {
   businesses: Business[];
   loading: boolean;
-  error: ApolloError | undefined;
+  error: Error | undefined;
 }
 
 export const useBusinessListQuery = (

@@ -1,5 +1,5 @@
 import { useEffect, useReducer } from 'react';
-import { useBusinessListQuery } from '../../domain/hook/useBusinessListQuery';
+import { useBusinessListInteractor } from '../../domain/interactor/useBusinessListInteractor';
 import { Business } from '../../domain/model/Business';
 import * as BusinessListMapper from './BusinessListMapper';
 import { BusinessListUiModel } from './BusinessListUiModel';
@@ -63,7 +63,7 @@ export const useBusinessList = (
   limit: number,
 ): UseBusinessListHook => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { businesses, loading, error } = useBusinessListQuery(term, location, sortBy, limit);
+  const { businesses, loading, error } = useBusinessListInteractor(term, location, sortBy, limit);
 
   useEffect(() => {
     if (loading) {
