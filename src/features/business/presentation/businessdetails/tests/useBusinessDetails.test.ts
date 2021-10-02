@@ -21,6 +21,10 @@ describe('useBusinessList', () => {
       price: '$$',
       rating: 4.5,
       reviewCount: 1337,
+      hours: new Map([
+        [0, ['11:00 - 14:00', '16:00 - 23:00']],
+        [1, ['11:00 - 14:00']],
+      ]),
       reviews: [
         {
           id: 'id',
@@ -44,6 +48,16 @@ describe('useBusinessList', () => {
       ratingImage: {
         testUri: '../../../src/assets/stars_small_4_half.png',
       },
+      hours: [
+        ['Monday', '11:00 - 14:00'],
+        ['', '16:00 - 23:00'],
+        ['Tuesday', '11:00 - 14:00'],
+        ['Wednesday', 'Closed'],
+        ['Thursday', 'Closed'],
+        ['Friday', 'Closed'],
+        ['Saturday', 'Closed'],
+        ['Sunday', 'Closed'],
+      ],
       reviews: [
         {
           id: 'id',

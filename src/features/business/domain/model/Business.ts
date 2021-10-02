@@ -9,6 +9,6 @@ export interface Business {
   address: string;
   price: string;
   categories: string[];
-  // hours: Map<number, string[]>;
+  hours: Map<number, string[]>;
   reviews: Review[];
 }

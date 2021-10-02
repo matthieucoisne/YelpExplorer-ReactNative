@@ -1,7 +1,7 @@
 import { ApolloError, useQuery } from '@apollo/client';
 import { renderHook } from '@testing-library/react-hooks';
-import { BusinessGraphQLModel } from '../../model/BusinessGraphQLModel';
 import { Business } from '../../../../domain/model/Business';
+import { BusinessGraphQLModel } from '../../model/BusinessGraphQLModel';
 import { useBusinessDetailsQuery } from '../useBusinessDetailsQuery';
 
 jest.mock('@apollo/client', () => {
@@ -15,7 +15,7 @@ jest.mock('@apollo/client', () => {
 
 const mockUseQuery = useQuery as jest.Mock;
 
-describe('useBusinessListQueryTests', () => {
+describe('useBusinessDetailsQueryTests', () => {
   const businessId = 'businessId';
 
   it('success', async () => {
@@ -48,6 +48,27 @@ describe('useBusinessListQueryTests', () => {
           rating: 5,
         },
       ],
+      hours: [
+        {
+          open: [
+            {
+              day: 0,
+              start: '1800',
+              end: '2200',
+            },
+            {
+              day: 1,
+              start: '1130',
+              end: '1400',
+            },
+            {
+              day: 1,
+              start: '1800',
+              end: '2200',
+            },
+          ],
+        },
+      ],
     };
     const expectedBusiness: Business = {
       id: 'id',
@@ -58,6 +79,10 @@ describe('useBusinessListQueryTests', () => {
       price: '$$',
       rating: 4.5,
       reviewCount: 1337,
+      hours: new Map([
+        [0, ['18:00 - 22:00']],
+        [1, ['11:30 - 14:00', '18:00 - 22:00']],
+      ]),
       reviews: [
         {
           id: 'id',

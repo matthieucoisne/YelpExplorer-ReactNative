@@ -19,7 +19,7 @@ export interface BusinessGraphQLModel {
   rating: number;
   price: string;
   location: LocationGraphQLModel;
-  // hours: [];
+  hours?: HourGraphQLModel[];
   reviews?: ReviewGraphQLModel[];
 }
 
@@ -30,4 +30,14 @@ interface CategoryGraphQLModel {
 interface LocationGraphQLModel {
   address1: string;
   city: string;
+}
+
+interface HourGraphQLModel {
+  open: OpenGraphQLModel[];
+}
+
+interface OpenGraphQLModel {
+  start: string;
+  end: string;
+  day: number;
 }

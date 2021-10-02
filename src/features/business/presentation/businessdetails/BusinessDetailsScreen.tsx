@@ -1,5 +1,6 @@
 import React from 'react';
 import { ActivityIndicator, FlatList, Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { Rows, Table } from 'react-native-table-component';
 import { BusinessDetailsRouteProp } from '../../../../App';
 import { BusinessDetailsUiModel, ReviewUiModel } from './BusinessDetailsUiModel';
 import { useBusinessDetails } from './useBusinessDetails';
@@ -29,6 +30,16 @@ export const BusinessDetailsScreen = ({ route }: { route: BusinessDetailsRoutePr
 const BusinessDetails = ({ business }: { business: BusinessDetailsUiModel }) => {
   return (
     <>
+      <BusinessInfo business={business} />
+      <BusinessHours hours={business.hours} />
+      <BusinessReviews reviews={business.reviews} />
+    </>
+  );
+};
+
+const BusinessInfo = ({ business }: { business: BusinessDetailsUiModel }) => {
+  return (
+    <>
       <Image style={styles.businessPhoto} source={{ uri: business.photoUrl }} />
       <View style={styles.businessDetails}>
         <Text style={styles.businessName}>{business.name}</Text>
@@ -41,9 +52,28 @@ const BusinessDetails = ({ business }: { business: BusinessDetailsUiModel }) => 
           {business.address}
         </Text>
       </View>
-      {/* TODO: {business.reviews.length > 0 ? <Text>Latest Reviews</Text> : undefined} */}
     </>
   );
+};
+
+const BusinessHours = ({ hours }: { hours: string[][] }) => {
+  return (
+    <>
+      <Text>Business Hours</Text>
+      <Table>
+        <Rows data={hours} textStyle={styles.text} widthArr={[100, 100]} />
+      </Table>
+    </>
+  );
+};
+
+const BusinessReviews = ({ reviews }: { reviews: ReviewUiModel[] }) => {
+  if (reviews.length > 0) {
+    return <Text>Latest Reviews</Text>;
+    // Reviews will be displayed with the <FlatList>
+  } else {
+    return <></>;
+  }
 };
 
 const Review = ({ review }: { review: ReviewUiModel }) => {
@@ -51,6 +81,7 @@ const Review = ({ review }: { review: ReviewUiModel }) => {
     <>
       <View style={styles.reviewCard}>
         <View style={styles.reviewUser}>
+          {/* TODO: add fallback image */}
           <Image style={styles.reviewUserImage} source={{ uri: review.user.photoUrl }} />
           <View style={styles.reviewUserAndRating}>
             <Text style={styles.reviewUserName}>{review.user.name}</Text>
