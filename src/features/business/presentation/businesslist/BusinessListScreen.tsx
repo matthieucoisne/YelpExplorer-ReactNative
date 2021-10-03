@@ -66,6 +66,7 @@ const Business = ({ business }: { business: BusinessListUiModel }) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
+    justifyContent: 'center',
   },
   businessCard: {
     flexDirection: 'row',

@@ -100,6 +100,7 @@ const Review = ({ review }: { review: ReviewUiModel }) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
+    justifyContent: 'center',
   },
   businessPhoto: {
     height: 200,
