@@ -27,7 +27,7 @@ export const toDomainModel = (business: BusinessGraphQLModel): Business => {
             return `${start} - ${end}`;
           }),
         );
-      })
+      });
     }
   }
 

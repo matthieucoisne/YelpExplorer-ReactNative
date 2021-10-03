@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/client';
+import { ApolloError, useQuery } from '@apollo/client';
 import { useMemo } from 'react';
 import { Business } from '../../../domain/model/Business';
 import * as BusinessGraphQLMapper from '../mapper/BusinessGraphQLMapper';
@@ -8,7 +8,7 @@ import { businessListQuery } from '../query/BusinessListQuery';
 export interface UseBusinessListQueryHook {
   businesses: Business[];
   loading: boolean;
-  error: Error | undefined;
+  error: ApolloError | undefined;
 }
 
 export const useBusinessListQuery = (
