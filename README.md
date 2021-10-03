@@ -1,10 +1,30 @@
 # YelpExplorer-ReactNative
 
+[![build](https://github.com/matthieucoisne/YelpExplorer-ReactNative/workflows/build/badge.svg)](https://github.com/matthieucoisne/YelpExplorer-ReactNative/blob/main/.github/workflows/build.yml)
+
 ## Project Description
 
-YelpExplorer-ReactNative is a React Native application that shows a list of business, their details and latest reviews using [Yelp](https://www.yelp.com/)'s API.
+YelpExplorer-ReactNative is a React Native application that shows a list of business, their details and latest reviews using [Yelp](https://www.yelp.com/)'s GraphQL API.
+This is a port of the [YelpExplorer-Flutter project](https://github.com/matthieucoisne/YelpExplorer-Flutter/)
 
-The goal of this project is to demonstrate the differences between using a REST API versus a GraphQL API in a modern React Native application, that has a scalable, maintainable and testable architecture.
+Business List | Business Details
+:-------------------------:|:-------------------------:
+![YelpExplorer-React Native - Business List](https://github.com/matthieucoisne/YelpExplorer-ReactNative/blob/main/media/YelpExplorer-ReactNative-BusinessList.png) | ![YelpExplorer-React Native - Business Details](https://github.com/matthieucoisne/YelpExplorer-ReactNative/blob/main/media/YelpExplorer-ReactNative-BusinessDetails.png)
+
+## Project Characteristics
+
+* Multiplatform project using [React Native](https://reactnative.dev/) and [TypeScript](https://www.typescriptlang.org/)
+* Continuous Integration with GitHub [Actions](https://github.com/matthieucoisne/YelpExplorer-ReactNative/actions)
+* Project management with GitHub [Project Board](https://github.com/matthieucoisne/YelpExplorer-ReactNative/projects/1)
+
+## Tech Stack
+
+* Tech Stack
+    * [React Native](https://reactnative.dev/) and [TypeScript](https://www.typescriptlang.org/)
+    * [React Hooks](https://reactjs.org/docs/hooks-intro.html)
+    * [React Navigation v6](https://reactnavigation.org/docs/getting-started)
+    * [Apollo GraphQL](https://www.apollographql.com/docs/react/)
+    * [Jest](https://jestjs.io/docs/tutorial-react-native)
 
 ## Development Setup
 
