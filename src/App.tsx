@@ -7,7 +7,7 @@ import { BusinessDetailsScreen } from './features/business/presentation/business
 import { BusinessListScreen } from './features/business/presentation/businesslist/BusinessListScreen';
 
 // Theme
-const yelpTheme = { ...DefaultTheme, colors: { ...DefaultTheme.colors, background: '#333' } };
+const appTheme = { ...DefaultTheme, colors: { ...DefaultTheme.colors, background: '#333' } };
 
 // Navigation
 type RootStackParamList = {
@@ -20,7 +20,7 @@ const Stack = createStackNavigator<RootStackParamList>();
 
 export const App = () => (
   <ApolloProvider client={apolloClient}>
-    <NavigationContainer theme={yelpTheme}>
+    <NavigationContainer theme={appTheme}>
       <Stack.Navigator
         initialRouteName="BusinessList"
         screenOptions={{
@@ -38,7 +38,11 @@ export const App = () => (
           component={BusinessListScreen}
           options={{ title: 'YelpExplorer-ReactNative' }}
         />
-        <Stack.Screen name="BusinessDetails" component={BusinessDetailsScreen} />
+        <Stack.Screen
+          name="BusinessDetails"
+          component={BusinessDetailsScreen}
+          options={{ title: 'YelpExplorer-ReactNative' }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   </ApolloProvider>
