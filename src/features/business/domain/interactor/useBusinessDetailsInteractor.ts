@@ -7,6 +7,7 @@ export interface UseBusinessDetailsInteractorHook {
   error: Error | undefined;
 }
 
+// See https://github.com/matthieucoisne/YelpExplorer-ReactNative/pull/24
 export const useBusinessDetailsInteractor = (businessId: String): UseBusinessDetailsInteractorHook => {
   return useBusinessDetailsQuery(businessId);
 };

@@ -7,11 +7,10 @@ export interface UseBusinessListInteractorHook {
   error: Error | undefined;
 }
 
+// See https://github.com/matthieucoisne/YelpExplorer-ReactNative/pull/24
 export const useBusinessListInteractor = (
   term: String,
   location: String,
   sortBy: String,
   limit: number,
-): UseBusinessListInteractorHook => {
-  return useBusinessListQuery(term, location, sortBy, limit);
-};
+): UseBusinessListInteractorHook => useBusinessListQuery(term, location, sortBy, limit);
