@@ -69,11 +69,10 @@ const styles = StyleSheet.create({
   },
   businessCard: {
     flexDirection: 'row',
+    backgroundColor: '#444',
     height: 100,
     borderRadius: 8,
-    backgroundColor: '#AAA',
-    marginHorizontal: 4,
-    marginVertical: 2,
+    margin: 4,
   },
   businessPhoto: {
     width: 100,
@@ -92,6 +91,7 @@ const styles = StyleSheet.create({
   businessName: {
     fontSize: 14,
     fontWeight: 'bold',
+    color: '#FFF',
   },
   ratingAndDate: {
     flexDirection: 'row',
@@ -103,5 +103,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 12,
+    color: '#FFF',
   },
 });

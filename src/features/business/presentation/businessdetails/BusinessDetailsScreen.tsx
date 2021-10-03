@@ -58,18 +58,18 @@ const BusinessInfo = ({ business }: { business: BusinessDetailsUiModel }) => {
 
 const BusinessHours = ({ hours }: { hours: string[][] }) => {
   return (
-    <>
-      <Text>Business Hours</Text>
-      <Table>
-        <Rows data={hours} textStyle={styles.text} widthArr={[100, 100]} />
+    <View>
+      <Text style={styles.sectionName}>Opening Hours</Text>
+      <Table style={styles.openingHours}>
+        <Rows data={hours} textStyle={styles.text} widthArr={[90, 200]} />
       </Table>
-    </>
+    </View>
   );
 };
 
 const BusinessReviews = ({ reviews }: { reviews: ReviewUiModel[] }) => {
   if (reviews.length > 0) {
-    return <Text>Latest Reviews</Text>;
+    return <Text style={styles.sectionName}>Latest Reviews</Text>;
     // Reviews will be displayed with the <FlatList>
   } else {
     return <></>;
@@ -106,20 +106,33 @@ const styles = StyleSheet.create({
   },
   businessDetails: {
     flexDirection: 'column',
-    height: 100,
+    height: 120,
     marginHorizontal: 8,
-    paddingTop: 2,
     alignItems: 'flex-start',
     justifyContent: 'space-evenly',
   },
   businessName: {
-    fontSize: 14,
+    fontSize: 26,
     fontWeight: 'bold',
+    color: '#FFF',
+    marginVertical: 8,
+  },
+  openingHours: {
+    marginTop: 2,
+    marginHorizontal: 8,
+  },
+  sectionName: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: '#FFF',
+    marginBottom: 4,
+    marginTop: 16,
+    marginHorizontal: 8,
   },
   reviewCard: {
     flexDirection: 'column',
+    backgroundColor: '#444',
     borderRadius: 4,
-    backgroundColor: '#AAA',
     marginHorizontal: 4,
     marginVertical: 2,
     padding: 8,
@@ -131,14 +144,15 @@ const styles = StyleSheet.create({
   reviewUserImage: {
     width: 44,
     height: 44,
-    marginRight: 8,
   },
   reviewUserName: {
     fontSize: 13,
     fontWeight: 'bold',
+    color: '#FFF',
   },
   reviewUserAndRating: {
     justifyContent: 'space-evenly',
+    marginLeft: 8,
   },
   ratingAndDate: {
     flexDirection: 'row',
@@ -149,6 +163,7 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   text: {
-    fontSize: 12,
+    fontSize: 13,
+    color: '#FFF',
   },
 });
