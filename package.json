@@ -10,7 +10,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "codegen": "npm run download-schema && npm run generate-graphql-types",
     "download-schema": "node ./scripts/download-schema.js",
-    "generate-graphql-types": "apollo codegen:generate --localSchemaFile=src/data/graphql/schema/schema.json --target=typescript --tagName=gql"
+    "generate-graphql-types": "apollo codegen:generate --localSchemaFile=./src/features/business/data/graphql/schema/schema.json --target=typescript --tagName=gql"
   },
   "dependencies": {
     "@apollo/client": "^3.4.11",
