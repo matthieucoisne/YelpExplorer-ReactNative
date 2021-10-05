@@ -55,7 +55,7 @@ const reducer = (state: State, action: Action): State => {
   }
 };
 
-export const useBusinessDetails = (businessId: String): UseBusinessDetailsHook => {
+export const useBusinessDetails = (businessId: string): UseBusinessDetailsHook => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { business, loading, error } = useBusinessDetailsInteractor(businessId);
 

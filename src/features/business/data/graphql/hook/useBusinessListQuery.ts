@@ -12,9 +12,9 @@ export interface UseBusinessListQueryHook {
 }
 
 export const useBusinessListQuery = (
-  term: String,
-  location: String,
-  sortBy: String,
+  term: string,
+  location: string,
+  sortBy: string,
   limit: number,
 ): UseBusinessListQueryHook => {
   const { data, loading, error } = useQuery<BusinessListGraphQLResponse>(businessListQuery, {

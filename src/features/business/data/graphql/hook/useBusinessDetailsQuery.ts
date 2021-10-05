@@ -11,7 +11,7 @@ export interface UseBusinessDetailsQueryHook {
   error: ApolloError | undefined;
 }
 
-export const useBusinessDetailsQuery = (businessId: String): UseBusinessDetailsQueryHook => {
+export const useBusinessDetailsQuery = (businessId: string): UseBusinessDetailsQueryHook => {
   const { data, loading, error } = useQuery<BusinessDetailsGraphQLResponse>(businessDetailsQuery, {
     variables: {
       id: businessId,

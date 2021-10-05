@@ -8,6 +8,6 @@ export interface UseBusinessDetailsInteractorHook {
 }
 
 // See https://github.com/matthieucoisne/YelpExplorer-ReactNative/pull/24
-export const useBusinessDetailsInteractor = (businessId: String): UseBusinessDetailsInteractorHook => {
+export const useBusinessDetailsInteractor = (businessId: string): UseBusinessDetailsInteractorHook => {
   return useBusinessDetailsQuery(businessId);
 };

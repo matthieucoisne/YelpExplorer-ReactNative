@@ -27,7 +27,7 @@ export const toUiModel = (business: Business): BusinessDetailsUiModel => {
     address: business.address,
     priceAndCategories: BusinessHelper.formatPriceAndCategories(business.price, business.categories),
     hours: hours,
-    reviews: toReviewUiModels(business.reviews!),
+    reviews: toReviewUiModels(business.reviews),
   };
 };
 

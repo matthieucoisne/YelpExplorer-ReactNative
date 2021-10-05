@@ -9,7 +9,7 @@ export const toUiModels = (businesses: Business[]): BusinessListUiModel[] => {
       name: `${index + 1}. ${business.name.toUpperCase()}`,
       photoUrl: business.photoUrl,
       ratingImage: BusinessHelper.getRatingImage(business.rating),
-      reviewCount: `${business.reviewCount} reviews`,
+      reviewCount: `${business.reviewCount} reviews`, // TODO i18n
       address: business.address,
       priceAndCategories: BusinessHelper.formatPriceAndCategories(business.price, business.categories),
     };

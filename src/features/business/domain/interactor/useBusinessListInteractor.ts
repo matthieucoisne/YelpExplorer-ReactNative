@@ -9,8 +9,8 @@ export interface UseBusinessListInteractorHook {
 
 // See https://github.com/matthieucoisne/YelpExplorer-ReactNative/pull/24
 export const useBusinessListInteractor = (
-  term: String,
-  location: String,
-  sortBy: String,
+  term: string,
+  location: string,
+  sortBy: string,
   limit: number,
 ): UseBusinessListInteractorHook => useBusinessListQuery(term, location, sortBy, limit);
