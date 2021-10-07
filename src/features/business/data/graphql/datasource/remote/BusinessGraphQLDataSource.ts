@@ -1,8 +1,5 @@
 import { ApolloClient, NormalizedCacheObject } from '@apollo/client';
-import {
-  BusinessDetailsGraphQLResponse,
-  BusinessListGraphQLResponse,
-} from '../../model/BusinessGraphQLModel';
+import { BusinessDetailsGraphQLModel, BusinessListGraphQLModel } from '../../model/BusinessGraphQLModel';
 import { businessDetailsQuery } from '../../query/BusinessDetailsQuery';
 import { businessListQuery } from '../../query/BusinessListQuery';
 
@@ -18,9 +15,9 @@ export class BusinessGraphQLDataSource {
     location: string,
     sortBy: string,
     limit: number,
-  ): Promise<BusinessListGraphQLResponse> {
+  ): Promise<BusinessListGraphQLModel> {
     return (
-      await this.graphQLClient.query<BusinessListGraphQLResponse>({
+      await this.graphQLClient.query<BusinessListGraphQLModel>({
         query: businessListQuery,
         variables: {
           term,
@@ -32,9 +29,9 @@ export class BusinessGraphQLDataSource {
     ).data;
   }
 
-  async getBusinessDetailsWithReviews(businessId: string): Promise<BusinessDetailsGraphQLResponse> {
+  async getBusinessDetailsWithReviews(businessId: string): Promise<BusinessDetailsGraphQLModel> {
     return (
-      await this.graphQLClient.query<BusinessDetailsGraphQLResponse>({
+      await this.graphQLClient.query<BusinessDetailsGraphQLModel>({
         query: businessDetailsQuery,
         variables: {
           id: businessId,

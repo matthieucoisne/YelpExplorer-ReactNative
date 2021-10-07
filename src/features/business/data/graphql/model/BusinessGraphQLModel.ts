@@ -1,12 +1,12 @@
 import { ReviewGraphQLModel } from './ReviewGraphQLModel';
 
-export interface BusinessListGraphQLResponse {
+export interface BusinessListGraphQLModel {
   search: {
     business: BusinessGraphQLModel[];
   };
 }
 
-export interface BusinessDetailsGraphQLResponse {
+export interface BusinessDetailsGraphQLModel {
   business: BusinessGraphQLModel;
 }
 
