@@ -1,5 +1,5 @@
 import { useEffect, useReducer } from 'react';
-import { useBusinessDetailsInteractor } from '../../domain/interactor/useBusinessDetailsInteractor';
+import { getBusinessDetailsUseCase } from '../../../../App';
 import { Business } from '../../domain/model/Business';
 import * as BusinessDetailsMapper from './BusinessDetailsMapper';
 import { BusinessDetailsUiModel } from './BusinessDetailsUiModel';
@@ -57,17 +57,18 @@ const reducer = (state: State, action: Action): State => {
 
 export const useBusinessDetails = (businessId: string): UseBusinessDetailsHook => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { business, loading, error } = useBusinessDetailsInteractor(businessId);
 
   useEffect(() => {
-    if (loading) {
-      dispatch({ type: ActionType.LOADING });
-    } else if (error !== undefined) {
-      dispatch({ type: ActionType.ERROR, error: Error(`Error: ${error}`) });
-    } else {
-      dispatch({ type: ActionType.SUCCESS, business: business! });
-    }
-  }, [business, loading, error]);
+    const getBusinessDetails = async () => {
+      try {
+        const business = await getBusinessDetailsUseCase.execute(businessId);
+        dispatch({ type: ActionType.SUCCESS, business: business });
+      } catch (error) {
+        dispatch({ type: ActionType.ERROR, error: Error(`Error: ${error}`) });
+      }
+    };
+    getBusinessDetails();
+  }, []);
 
   return { state };
 };
