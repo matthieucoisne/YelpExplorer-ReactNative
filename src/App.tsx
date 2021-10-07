@@ -3,6 +3,10 @@ import { DefaultTheme, NavigationContainer, RouteProp } from '@react-navigation/
 import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
 import { apolloClient } from './core/GraphQLClient';
+import { BusinessGraphQLDataSource } from './features/business/data/graphql/datasource/remote/BusinessGraphQLDataSource';
+import { BusinessGraphQLRepository } from './features/business/data/graphql/repository/BusinessGraphQLRepository';
+import { GetBusinessDetailsUseCaseImpl } from './features/business/domain/usecase/GetBusinessDetailsUseCaseImpl';
+import { GetBusinessListUseCaseImpl } from './features/business/domain/usecase/GetBusinessListUseCaseImpl';
 import { BusinessDetailsScreen } from './features/business/presentation/businessdetails/BusinessDetailsScreen';
 import { BusinessListScreen } from './features/business/presentation/businesslist/BusinessListScreen';
 
@@ -47,3 +51,8 @@ export const App = () => (
     </NavigationContainer>
   </ApolloProvider>
 );
+
+// TODO useContext? Provider?
+const businessRepository = new BusinessGraphQLRepository(new BusinessGraphQLDataSource(apolloClient));
+export const getBusinessListUseCase = new GetBusinessListUseCaseImpl(businessRepository);
+export const getBusinessDetailsUseCase = new GetBusinessDetailsUseCaseImpl(businessRepository);

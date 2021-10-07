@@ -1,5 +1,5 @@
 import { useEffect, useReducer } from 'react';
-import { useBusinessListInteractor } from '../../domain/interactor/useBusinessListInteractor';
+import { getBusinessListUseCase } from '../../../../App';
 import { Business } from '../../domain/model/Business';
 import * as BusinessListMapper from './BusinessListMapper';
 import { BusinessListUiModel } from './BusinessListUiModel';
@@ -57,23 +57,24 @@ const reducer = (state: State, action: Action): State => {
 };
 
 export const useBusinessList = (
-  term: String,
-  location: String,
-  sortBy: String,
+  term: string,
+  location: string,
+  sortBy: string,
   limit: number,
 ): UseBusinessListHook => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { businesses, loading, error } = useBusinessListInteractor(term, location, sortBy, limit);
 
   useEffect(() => {
-    if (loading) {
-      dispatch({ type: ActionType.LOADING });
-    } else if (error !== undefined) {
-      dispatch({ type: ActionType.ERROR, error: Error(`Error: ${error}`) });
-    } else {
-      dispatch({ type: ActionType.SUCCESS, businesses: businesses });
-    }
-  }, [businesses, loading, error]);
+    const getBusinessList = async () => {
+      try {
+        const businesses = await getBusinessListUseCase.execute(term, location, sortBy, limit);
+        dispatch({ type: ActionType.SUCCESS, businesses: businesses });
+      } catch (error) {
+        dispatch({ type: ActionType.ERROR, error: Error(`Error: ${error}`) });
+      }
+    };
+    getBusinessList();
+  }, []);
 
   return { state };
 };
