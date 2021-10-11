@@ -2,7 +2,18 @@ import * as Constants from '../../../../../../core/Constants';
 import { BusinessListRestModel, BusinessRestModel } from '../../model/BusinessRestModel';
 import { ReviewListRestModel } from '../../model/ReviewRestModel';
 
-export class BusinessRestDataSource {
+export interface BusinessRestDataSource {
+  getBusinessList(
+    term: string,
+    location: string,
+    sortBy: string,
+    limit: number,
+  ): Promise<BusinessListRestModel>;
+  getBusinessDetails(businessId: string): Promise<BusinessRestModel>;
+  getBusinessReviews(businessId: string): Promise<ReviewListRestModel>;
+}
+
+export class BusinessRestDataSourceImpl implements BusinessRestDataSource {
   async getBusinessList(
     term: string,
     location: string,

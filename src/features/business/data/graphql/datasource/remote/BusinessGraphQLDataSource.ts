@@ -3,7 +3,17 @@ import { BusinessDetailsGraphQLModel, BusinessListGraphQLModel } from '../../mod
 import { businessDetailsQuery } from '../../query/BusinessDetailsQuery';
 import { businessListQuery } from '../../query/BusinessListQuery';
 
-export class BusinessGraphQLDataSource {
+export interface BusinessGraphQLDataSource {
+  getBusinessList(
+    term: string,
+    location: string,
+    sortBy: string,
+    limit: number,
+  ): Promise<BusinessListGraphQLModel>;
+  getBusinessDetailsWithReviews(businessId: string): Promise<BusinessDetailsGraphQLModel>;
+}
+
+export class BusinessGraphQLDataSourceImpl implements BusinessGraphQLDataSource {
   private graphQLClient: ApolloClient<NormalizedCacheObject>;
 
   constructor(graphQLClient: ApolloClient<NormalizedCacheObject>) {
