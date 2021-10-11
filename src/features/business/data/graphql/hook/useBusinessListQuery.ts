@@ -2,7 +2,7 @@ import { ApolloError, useQuery } from '@apollo/client';
 import { useMemo } from 'react';
 import { Business } from '../../../domain/model/Business';
 import * as BusinessGraphQLMapper from '../mapper/BusinessGraphQLMapper';
-import { BusinessListGraphQLResponse } from '../model/BusinessGraphQLModel';
+import { BusinessListGraphQLModel } from '../model/BusinessGraphQLModel';
 import { businessListQuery } from '../query/BusinessListQuery';
 
 export interface UseBusinessListQueryHook {
@@ -17,7 +17,7 @@ export const useBusinessListQuery = (
   sortBy: string,
   limit: number,
 ): UseBusinessListQueryHook => {
-  const { data, loading, error } = useQuery<BusinessListGraphQLResponse>(businessListQuery, {
+  const { data, loading, error } = useQuery<BusinessListGraphQLModel>(businessListQuery, {
     variables: {
       term,
       location,

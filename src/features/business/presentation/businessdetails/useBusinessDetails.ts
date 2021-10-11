@@ -1,5 +1,5 @@
 import { useEffect, useReducer } from 'react';
-import { getBusinessDetailsUseCase } from '../../../../App';
+import { getBusinessDetailsUseCase } from '../../../../core/Inject';
 import { Business } from '../../domain/model/Business';
 import * as BusinessDetailsMapper from './BusinessDetailsMapper';
 import { BusinessDetailsUiModel } from './BusinessDetailsUiModel';

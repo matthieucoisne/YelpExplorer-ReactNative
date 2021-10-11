@@ -1,3 +1,4 @@
+import * as Constants from '../../../../core/Constants';
 import { Business } from '../../domain/model/Business';
 import { Review } from '../../domain/model/Review';
 import { User } from '../../domain/model/User';
@@ -6,8 +7,8 @@ import { BusinessDetailsUiModel, ReviewUiModel, UserUiModel } from './BusinessDe
 
 export const toUiModel = (business: Business): BusinessDetailsUiModel => {
   const hours: string[][] = [];
-  for (let i = 0; i < BusinessHelper.days.size; i++) {
-    const day = BusinessHelper.days.get(i)!;
+  for (let i = 0; i < Constants.DAYS.size; i++) {
+    const day = Constants.DAYS.get(i)!;
     const openList = business.hours.get(i) ?? [];
     if (openList.length > 0) {
       for (let j = 0; j < openList.length; j++) {

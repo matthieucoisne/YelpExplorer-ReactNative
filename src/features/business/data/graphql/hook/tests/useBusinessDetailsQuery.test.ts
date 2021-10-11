@@ -15,11 +15,11 @@ jest.mock('@apollo/client', () => {
 
 const mockUseQuery = useQuery as jest.Mock;
 
-describe('useBusinessDetailsQueryTests', () => {
+describe('useBusinessDetailsQuery', () => {
   const businessId = 'businessId';
 
   it('success', async () => {
-    // Given
+    // Arrange
     const business: BusinessGraphQLModel = {
       id: 'id',
       name: 'name',
@@ -104,34 +104,34 @@ describe('useBusinessDetailsQueryTests', () => {
       error: undefined,
     }));
 
-    // When
+    // Act
     const { result } = renderHook(() => useBusinessDetailsQuery(businessId));
 
-    // then
+    // Assert
     expect(result.current.business).toEqual(expectedBusiness);
     expect(result.current.loading).toEqual(false);
     expect(result.current.error).toBeUndefined();
   });
 
   it('loading', async () => {
-    // Given
+    // Arrange
     mockUseQuery.mockImplementation(() => ({
       data: undefined,
       loading: true,
       error: undefined,
     }));
 
-    // When
+    // Act
     const { result } = renderHook(() => useBusinessDetailsQuery(businessId));
 
-    // then
+    // Assert
     expect(result.current.business).toEqual(undefined);
     expect(result.current.loading).toEqual(true);
     expect(result.current.error).toBeUndefined();
   });
 
   it('error', async () => {
-    // Given
+    // Arrange
     const error = new ApolloError({});
     mockUseQuery.mockImplementation(() => ({
       data: undefined,
@@ -139,10 +139,10 @@ describe('useBusinessDetailsQueryTests', () => {
       error: error,
     }));
 
-    // When
+    // Act
     const { result } = renderHook(() => useBusinessDetailsQuery(businessId));
 
-    // then
+    // Assert
     expect(result.current.business).toEqual(undefined);
     expect(result.current.loading).toEqual(false);
     expect(result.current.error).toBe(error);
