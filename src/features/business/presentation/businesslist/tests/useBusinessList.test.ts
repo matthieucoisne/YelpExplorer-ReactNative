@@ -1,86 +1,83 @@
-import { ApolloError } from '@apollo/client';
 import { renderHook } from '@testing-library/react-hooks';
-import * as useBusinessListQuery from '../../../data/graphql/hook/useBusinessListQuery';
 import { Business } from '../../../domain/model/Business';
+import { GetBusinessListUseCase } from '../../../domain/usecase/GetBusinessListUseCase';
 import { BusinessListUiModel } from '../BusinessListUiModel';
 import { useBusinessList } from '../useBusinessList';
 
+const fakeUseCase: GetBusinessListUseCase = {
+  execute(term: string, location: string, sortBy: string, limit: number): Promise<Business[]> {
+    throw new Error('Function not implemented.');
+  },
+};
+jest.mock('../../../../../core/Inject', () => {
+  return {
+    getBusinessListUseCase: fakeUseCase,
+  };
+});
+
 describe('useBusinessList', () => {
-  // const term = 'term';
-  // const location = 'location';
-  // const rating = 'rating';
-  // const limit = 10;
+  const term = 'term';
+  const location = 'location';
+  const sortBy = 'rating';
+  const limit = 10;
 
-  // const spy = jest.spyOn(useBusinessListQuery, 'useBusinessListQuery');
+  it('success', async () => {
+    // Arrange
+    const fakeBusiness: Business = {
+      id: 'id',
+      name: 'name',
+      address: 'address',
+      photoUrl: 'http://',
+      price: '$$',
+      categories: ['category#1'],
+      reviewCount: 1337,
+      rating: 4.5,
+      hours: new Map<number, string[]>(),
+      reviews: [],
+    };
+    const fakeBusinessListUiModel: BusinessListUiModel = {
+      id: 'id',
+      name: '1. NAME',
+      address: 'address',
+      photoUrl: 'http://',
+      priceAndCategories: '$$  •  category#1',
+      reviewCount: '1337 reviews',
+      ratingImage: {
+        testUri: '../../../src/assets/stars_small_4_half.png',
+      },
+    };
+    jest.spyOn(fakeUseCase, 'execute').mockResolvedValue([fakeBusiness]);
 
-  it.only('fake', async () => {
-    expect(1).toEqual(1);
-  })
+    // Act
+    const { result, waitForNextUpdate } = renderHook(() => useBusinessList(term, location, sortBy, limit));
 
-  // it('success', async () => {
-  //   // Given
-  //   const business: Business = {
-  //     id: 'id',
-  //     name: 'name',
-  //     address: 'address',
-  //     categories: ['category#1'],
-  //     photoUrl: 'http://',
-  //     price: '$$',
-  //     rating: 4.5,
-  //     reviewCount: 1337,
-  //     hours: new Map(),
-  //     reviews: [],
-  //   };
-  //   const expectedBusiness: BusinessListUiModel = {
-  //     id: 'id',
-  //     name: '1. NAME',
-  //     address: 'address',
-  //     photoUrl: 'http://',
-  //     priceAndCategories: '$$  •  category#1',
-  //     reviewCount: '1337 reviews',
-  //     ratingImage: {
-  //       testUri: '../../../src/assets/stars_small_4_half.png',
-  //     },
-  //   };
-  //   spy.mockReturnValue({
-  //     businesses: [business],
-  //     loading: false,
-  //     error: undefined,
-  //   });
+    // Assert
+    expect(result.current.state.businesses).toStrictEqual([]);
+    expect(result.current.state.isLoading).toEqual(true);
+    expect(result.current.state.error).toBeUndefined();
+    await waitForNextUpdate();
+    expect(result.current.state.businesses).toStrictEqual([fakeBusinessListUiModel]);
+    expect(result.current.state.isLoading).toEqual(false);
+    expect(result.current.state.error).toBeUndefined();
+    expect(fakeUseCase.execute).toHaveBeenNthCalledWith(1, term, location, sortBy, limit);
+  });
 
-  //   // When
-  //   const { result } = renderHook(() => useBusinessList(term, location, rating, limit));
+  it('error', async () => {
+    // Arrange
+    const error = 'Something went wrong, please try again later.';
+    jest.spyOn(fakeUseCase, 'execute').mockRejectedValue(error);
 
-  //   // Then
-  //   expect(result.current.state.businesses).toStrictEqual([expectedBusiness]);
-  //   expect(result.current.state.isLoading).toEqual(false);
-  //   expect(result.current.state.error).toBeUndefined();
-  // });
+    // Act
+    const { result, waitForNextUpdate } = renderHook(() => useBusinessList(term, location, sortBy, limit));
 
-  // it('loading', async () => {
-  //   // Given
-  //   spy.mockReturnValue({ businesses: [], loading: true, error: undefined });
-
-  //   // When
-  //   const { result } = renderHook(() => useBusinessList(term, location, rating, limit));
-
-  //   // Then
-  //   expect(result.current.state.businesses).toStrictEqual([]);
-  //   expect(result.current.state.isLoading).toEqual(true);
-  //   expect(result.current.state.error).toBeUndefined();
-  // });
-
-  // it('error', async () => {
-  //   // Given
-  //   const error = new ApolloError({});
-  //   spy.mockReturnValue({ businesses: [], loading: false, error: error });
-
-  //   // When
-  //   const { result } = renderHook(() => useBusinessList(term, location, rating, limit));
-
-  //   // Then
-  //   expect(result.current.state.businesses).toStrictEqual([]);
-  //   expect(result.current.state.isLoading).toEqual(false);
-  //   expect(result.current.state.error).toStrictEqual(Error(`Error: ${error}`));
-  // });
+    // Assert
+    expect(result.current.state.businesses).toStrictEqual([]);
+    expect(result.current.state.isLoading).toEqual(true);
+    expect(result.current.state.error).toBeUndefined();
+    await waitForNextUpdate();
+    expect(result.current.state.businesses).toStrictEqual([]);
+    expect(result.current.state.isLoading).toEqual(false);
+    expect(result.current.state.error).toStrictEqual(Error(`Error: ${error}`));
+    expect(fakeUseCase.execute).toHaveBeenNthCalledWith(1, term, location, sortBy, limit);
+  });
 });
