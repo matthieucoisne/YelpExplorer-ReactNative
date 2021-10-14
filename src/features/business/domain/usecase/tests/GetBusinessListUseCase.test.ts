@@ -5,14 +5,14 @@ import { GetBusinessListUseCaseImpl } from '../GetBusinessListUseCaseImpl';
 describe('GetBusinessListUseCase', () => {
   const term = 'term';
   const location = 'location';
-  const rating = 'rating';
+  const sortBy = 'rating';
   const limit = 10;
 
   it('should get the business list', async () => {
     // Arrange
     const fakeBusiness: Business = {
       id: 'id',
-      name: '1. NAME',
+      name: 'name',
       address: 'address',
       photoUrl: 'http://',
       price: '$$',
@@ -36,12 +36,11 @@ describe('GetBusinessListUseCase', () => {
     const usecase = new GetBusinessListUseCaseImpl(fakeRepository);
 
     // Act
-    const result = await usecase.execute(term, location, rating, limit);
+    const result = await usecase.execute(term, location, sortBy, limit);
 
     // Assert
     expect(result).toStrictEqual([fakeBusiness]);
-    expect(mockGetBusinessList).toHaveBeenCalledWith(term, location, rating, limit);
-    expect(mockGetBusinessList).toHaveBeenCalledTimes(1);
+    expect(mockGetBusinessList).toHaveBeenNthCalledWith(1, term, location, sortBy, limit);
     expect(mockGetBusinessDetailsWithReviews).toHaveBeenCalledTimes(0);
   });
 });

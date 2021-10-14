@@ -19,9 +19,6 @@ const getBusinessRepository = (): BusinessRepository => {
     case Constants.DataLayer.GRAPHQL: {
       return new BusinessGraphQLRepository(new BusinessGraphQLDataSourceImpl(graphQLClient));
     }
-    default: {
-      return new BusinessRestRepository(new BusinessRestDataSourceImpl());
-    }
   }
 };
 const businessRepository = getBusinessRepository();

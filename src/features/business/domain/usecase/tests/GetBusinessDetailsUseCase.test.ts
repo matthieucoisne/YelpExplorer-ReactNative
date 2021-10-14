@@ -21,7 +21,7 @@ describe('GetBusinessDetailsUseCase', () => {
     const expectedReviews = [expectedReview, expectedReview];
     const expectedBusiness: Business = {
       id: 'id',
-      name: '1. NAME',
+      name: 'name',
       address: 'address',
       photoUrl: 'http://',
       price: '$$',
@@ -50,8 +50,7 @@ describe('GetBusinessDetailsUseCase', () => {
 
     // Assert
     expect(result).toStrictEqual(expectedBusiness);
-    expect(mockGetBusinessDetailsWithReviews).toHaveBeenCalledTimes(1);
-    expect(mockGetBusinessDetailsWithReviews).toHaveBeenCalledWith(businessId);
+    expect(mockGetBusinessDetailsWithReviews).toHaveBeenNthCalledWith(1, businessId);
     expect(mockGetBusinessList).toHaveBeenCalledTimes(0);
   });
 });

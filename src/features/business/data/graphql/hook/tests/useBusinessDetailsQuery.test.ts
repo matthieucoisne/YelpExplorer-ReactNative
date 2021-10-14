@@ -12,7 +12,6 @@ jest.mock('@apollo/client', () => {
     useQuery: jest.fn(),
   };
 });
-
 const mockUseQuery = useQuery as jest.Mock;
 
 describe('useBusinessDetailsQuery', () => {

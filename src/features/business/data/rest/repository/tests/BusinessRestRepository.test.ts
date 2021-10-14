@@ -11,7 +11,7 @@ afterEach(() => {
 describe('BusinessRestRepository', () => {
   const term = 'term';
   const location = 'location';
-  const rating = 'rating';
+  const sortBy = 'rating';
   const limit = 10;
   const businessId = 'businessId';
 
@@ -31,6 +31,7 @@ describe('BusinessRestRepository', () => {
       throw new Error('Function not implemented.');
     },
   };
+  const repository = new BusinessRestRepository(fakeRestDataSource);
 
   it('should get the business list', async () => {
     // Arrange
@@ -61,22 +62,18 @@ describe('BusinessRestRepository', () => {
     };
     const fakeBusinessList = [fakeBusiness, fakeBusiness];
 
-    const mockGetBusinessList = jest.spyOn(fakeRestDataSource, 'getBusinessList');
-    mockGetBusinessList.mockImplementation(() => {
+    const mockGetBusinessList = jest.spyOn(fakeRestDataSource, 'getBusinessList').mockImplementation(() => {
       return Promise.resolve(fakeBusinessListRestModel);
     });
     const mockGetBusinessDetails = jest.spyOn(fakeRestDataSource, 'getBusinessDetails');
     const mockGetBusinessReviews = jest.spyOn(fakeRestDataSource, 'getBusinessReviews');
 
-    const repository = new BusinessRestRepository(fakeRestDataSource);
-
     // Act
-    const result = await repository.getBusinessList(term, location, rating, limit);
+    const result = await repository.getBusinessList(term, location, sortBy, limit);
 
     // Assert
     expect(result).toStrictEqual(fakeBusinessList);
-    expect(mockGetBusinessList).toHaveBeenCalledTimes(1);
-    expect(mockGetBusinessList).toHaveBeenCalledWith(term, location, rating, limit);
+    expect(mockGetBusinessList).toHaveBeenNthCalledWith(1, term, location, sortBy, limit);
     expect(mockGetBusinessDetails).toHaveBeenCalledTimes(0);
     expect(mockGetBusinessReviews).toHaveBeenCalledTimes(0);
   });
@@ -142,26 +139,24 @@ describe('BusinessRestRepository', () => {
     };
 
     const mockGetBusinessList = jest.spyOn(fakeRestDataSource, 'getBusinessList');
-    const mockGetBusinessDetails = jest.spyOn(fakeRestDataSource, 'getBusinessDetails');
-    mockGetBusinessDetails.mockImplementation(() => {
-      return Promise.resolve(fakeBusinessRestModel);
-    });
-    const mockGetBusinessReviews = jest.spyOn(fakeRestDataSource, 'getBusinessReviews');
-    mockGetBusinessReviews.mockImplementation(() => {
-      return Promise.resolve(fakeReviewListRestModel);
-    });
-
-    const repository = new BusinessRestRepository(fakeRestDataSource);
+    const mockGetBusinessDetails = jest
+      .spyOn(fakeRestDataSource, 'getBusinessDetails')
+      .mockImplementation(() => {
+        return Promise.resolve(fakeBusinessRestModel);
+      });
+    const mockGetBusinessReviews = jest
+      .spyOn(fakeRestDataSource, 'getBusinessReviews')
+      .mockImplementation(() => {
+        return Promise.resolve(fakeReviewListRestModel);
+      });
 
     // Act
     const result = await repository.getBusinessDetailsWithReviews(businessId);
 
     // Assert
     expect(result).toStrictEqual(fakeBusiness);
-    expect(mockGetBusinessDetails).toHaveBeenCalledTimes(1);
-    expect(mockGetBusinessDetails).toHaveBeenCalledWith(businessId);
-    expect(mockGetBusinessReviews).toHaveBeenCalledTimes(1);
-    expect(mockGetBusinessReviews).toHaveBeenCalledWith(businessId);
+    expect(mockGetBusinessDetails).toHaveBeenNthCalledWith(1, businessId);
+    expect(mockGetBusinessReviews).toHaveBeenNthCalledWith(1, businessId);
     expect(mockGetBusinessList).toHaveBeenCalledTimes(0);
   });
 });

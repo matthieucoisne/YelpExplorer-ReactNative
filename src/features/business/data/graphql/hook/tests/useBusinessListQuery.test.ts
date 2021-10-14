@@ -12,13 +12,12 @@ jest.mock('@apollo/client', () => {
     useQuery: jest.fn(),
   };
 });
-
 const mockUseQuery = useQuery as jest.Mock;
 
 describe('useBusinessListQuery', () => {
   const term = 'term';
   const location = 'location';
-  const rating = 'rating';
+  const sortBy = 'rating';
   const limit = 10;
 
   it('success', async () => {
@@ -61,7 +60,7 @@ describe('useBusinessListQuery', () => {
     }));
 
     // Act
-    const { result } = renderHook(() => useBusinessListQuery(term, location, rating, limit));
+    const { result } = renderHook(() => useBusinessListQuery(term, location, sortBy, limit));
 
     // Assert
     expect(result.current.businesses).toEqual([expectedBusiness, expectedBusiness]);
@@ -78,7 +77,7 @@ describe('useBusinessListQuery', () => {
     }));
 
     // Act
-    const { result } = renderHook(() => useBusinessListQuery(term, location, rating, limit));
+    const { result } = renderHook(() => useBusinessListQuery(term, location, sortBy, limit));
 
     // Assert
     expect(result.current.businesses).toEqual([]);
@@ -96,7 +95,7 @@ describe('useBusinessListQuery', () => {
     }));
 
     // Act
-    const { result } = renderHook(() => useBusinessListQuery(term, location, rating, limit));
+    const { result } = renderHook(() => useBusinessListQuery(term, location, sortBy, limit));
 
     // Assert
     expect(result.current.businesses).toEqual([]);
