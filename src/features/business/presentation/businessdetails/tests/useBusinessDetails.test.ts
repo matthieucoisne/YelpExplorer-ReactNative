@@ -81,7 +81,6 @@ describe('useBusinessDetails', () => {
         },
       ],
     };
-
     jest.spyOn(fakeUseCase, 'execute').mockResolvedValue(fakeBusiness);
 
     // Act

@@ -11,7 +11,7 @@ import {
   View,
 } from 'react-native';
 import { BusinessDetailsNavigationProp } from '../../../../App';
-import { BusinessListUiModel } from './BusinessListUiModel';
+import { BusinessUiModel } from './BusinessListUiModel';
 import { useBusinessList } from './useBusinessList';
 
 export const BusinessListScreen = () => {
@@ -34,7 +34,7 @@ export const BusinessListScreen = () => {
   );
 };
 
-const Business = ({ business }: { business: BusinessListUiModel }) => {
+const Business = ({ business }: { business: BusinessUiModel }) => {
   const navigation = useNavigation<BusinessDetailsNavigationProp>();
 
   return (

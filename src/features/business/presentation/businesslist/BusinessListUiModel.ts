@@ -1,4 +1,6 @@
-export interface BusinessListUiModel {
+export type BusinessListUiModel = BusinessUiModel[];
+
+export interface BusinessUiModel {
   id: string;
   name: string;
   photoUrl: string;

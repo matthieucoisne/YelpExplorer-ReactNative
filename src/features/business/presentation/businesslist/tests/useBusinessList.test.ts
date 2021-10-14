@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react-hooks';
 import { Business } from '../../../domain/model/Business';
 import { GetBusinessListUseCase } from '../../../domain/usecase/GetBusinessListUseCase';
-import { BusinessListUiModel } from '../BusinessListUiModel';
+import { BusinessUiModel } from '../BusinessListUiModel';
 import { useBusinessList } from '../useBusinessList';
 
 const fakeUseCase: GetBusinessListUseCase = {
@@ -35,7 +35,8 @@ describe('useBusinessList', () => {
       hours: new Map<number, string[]>(),
       reviews: [],
     };
-    const fakeBusinessListUiModel: BusinessListUiModel = {
+    const fakeBusinessList = [fakeBusiness, fakeBusiness];
+    const fakeBusinessUiModel: BusinessUiModel = {
       id: 'id',
       name: '1. NAME',
       address: 'address',
@@ -46,7 +47,8 @@ describe('useBusinessList', () => {
         testUri: '../../../src/assets/stars_small_4_half.png',
       },
     };
-    jest.spyOn(fakeUseCase, 'execute').mockResolvedValue([fakeBusiness]);
+    const fakeBusinessListUiModel = [fakeBusinessUiModel, {...fakeBusinessUiModel, name: '2. NAME'}];
+    jest.spyOn(fakeUseCase, 'execute').mockResolvedValue(fakeBusinessList);
 
     // Act
     const { result, waitForNextUpdate } = renderHook(() => useBusinessList(term, location, sortBy, limit));
@@ -56,7 +58,7 @@ describe('useBusinessList', () => {
     expect(result.current.state.isLoading).toEqual(true);
     expect(result.current.state.error).toBeUndefined();
     await waitForNextUpdate();
-    expect(result.current.state.businesses).toStrictEqual([fakeBusinessListUiModel]);
+    expect(result.current.state.businesses).toStrictEqual(fakeBusinessListUiModel);
     expect(result.current.state.isLoading).toEqual(false);
     expect(result.current.state.error).toBeUndefined();
     expect(fakeUseCase.execute).toHaveBeenNthCalledWith(1, term, location, sortBy, limit);

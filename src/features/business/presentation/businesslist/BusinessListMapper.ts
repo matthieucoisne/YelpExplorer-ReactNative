@@ -2,7 +2,7 @@ import { Business } from '../../domain/model/Business';
 import * as BusinessHelper from '../helper/BusinessHelper';
 import { BusinessListUiModel } from './BusinessListUiModel';
 
-export const toUiModels = (businesses: Business[]): BusinessListUiModel[] => {
+export const toUiModels = (businesses: Business[]): BusinessListUiModel => {
   return businesses.map((business: Business, index: number) => {
     return {
       id: business.id,

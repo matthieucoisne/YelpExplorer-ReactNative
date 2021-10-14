@@ -10,7 +10,7 @@ export interface UseBusinessListHook {
 
 interface State {
   isLoading: boolean;
-  businesses: BusinessListUiModel[];
+  businesses: BusinessListUiModel;
   error?: Error;
 }
 
