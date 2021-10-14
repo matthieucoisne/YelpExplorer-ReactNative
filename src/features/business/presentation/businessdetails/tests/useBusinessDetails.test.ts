@@ -1,121 +1,119 @@
-import { ApolloError } from '@apollo/client';
 import { renderHook } from '@testing-library/react-hooks';
-import * as useBusinessDetailsQuery from '../../../data/graphql/hook/useBusinessDetailsQuery';
 import { Business } from '../../../domain/model/Business';
+import { GetBusinessDetailsUseCase } from '../../../domain/usecase/GetBusinessDetailsUseCase';
 import { BusinessDetailsUiModel } from '../BusinessDetailsUiModel';
 import { useBusinessDetails } from '../useBusinessDetails';
 
-describe('useBusinessList', () => {
-  // const businessId = 'businessId';
+const fakeUseCase: GetBusinessDetailsUseCase = {
+  execute: function (businessId: string): Promise<Business> {
+    throw new Error('Function not implemented.');
+  },
+};
+jest.mock('../../../../../core/Inject', () => {
+  return {
+    getBusinessDetailsUseCase: fakeUseCase,
+  };
+});
 
-  // const spy = jest.spyOn(useBusinessDetailsQuery, 'useBusinessDetailsQuery');
+describe('useBusinessDetails', () => {
+  const businessId = 'businessId';
 
-  it.only('fake', async () => {
-    expect(1).toEqual(1);
-  })
+  it('success', async () => {
+    // Arrange
+    const fakeBusiness: Business = {
+      id: 'id',
+      name: 'name',
+      address: 'address',
+      categories: ['category#1'],
+      photoUrl: 'http://',
+      price: '$$',
+      rating: 4.5,
+      reviewCount: 1337,
+      hours: new Map([
+        [0, ['11:00 - 14:00', '16:00 - 23:00']],
+        [1, ['11:00 - 14:00']],
+      ]),
+      reviews: [
+        {
+          id: 'id',
+          user: {
+            name: 'name',
+            photoUrl: 'http://',
+          },
+          text: 'text',
+          timeCreated: '01-01-2020',
+          rating: 5,
+        },
+      ],
+    };
+    const fakeBusinessDetailsUiModel: BusinessDetailsUiModel = {
+      id: 'id',
+      name: 'NAME',
+      address: 'address',
+      photoUrl: 'http://',
+      priceAndCategories: '$$  •  category#1',
+      reviewCount: '1337 reviews',
+      ratingImage: {
+        testUri: '../../../src/assets/stars_small_4_half.png',
+      },
+      hours: [
+        ['Monday', '11:00 - 14:00'],
+        ['', '16:00 - 23:00'],
+        ['Tuesday', '11:00 - 14:00'],
+        ['Wednesday', 'Closed'],
+        ['Thursday', 'Closed'],
+        ['Friday', 'Closed'],
+        ['Saturday', 'Closed'],
+        ['Sunday', 'Closed'],
+      ],
+      reviews: [
+        {
+          id: 'id',
+          user: {
+            name: 'name',
+            photoUrl: 'http://',
+          },
+          text: 'text',
+          timeCreated: '01-01-2020',
+          ratingImage: {
+            testUri: '../../../src/assets/stars_small_5.png',
+          },
+        },
+      ],
+    };
 
-  // it('success', async () => {
-  //   // Given
-  //   const business: Business = {
-  //     id: 'id',
-  //     name: 'name',
-  //     address: 'address',
-  //     categories: ['category#1'],
-  //     photoUrl: 'http://',
-  //     price: '$$',
-  //     rating: 4.5,
-  //     reviewCount: 1337,
-  //     hours: new Map([
-  //       [0, ['11:00 - 14:00', '16:00 - 23:00']],
-  //       [1, ['11:00 - 14:00']],
-  //     ]),
-  //     reviews: [
-  //       {
-  //         id: 'id',
-  //         user: {
-  //           name: 'name',
-  //           photoUrl: 'http://',
-  //         },
-  //         text: 'text',
-  //         timeCreated: '01-01-2020',
-  //         rating: 5,
-  //       },
-  //     ],
-  //   };
-  //   const expectedBusiness: BusinessDetailsUiModel = {
-  //     id: 'id',
-  //     name: 'NAME',
-  //     address: 'address',
-  //     photoUrl: 'http://',
-  //     priceAndCategories: '$$  •  category#1',
-  //     reviewCount: '1337 reviews',
-  //     ratingImage: {
-  //       testUri: '../../../src/assets/stars_small_4_half.png',
-  //     },
-  //     hours: [
-  //       ['Monday', '11:00 - 14:00'],
-  //       ['', '16:00 - 23:00'],
-  //       ['Tuesday', '11:00 - 14:00'],
-  //       ['Wednesday', 'Closed'],
-  //       ['Thursday', 'Closed'],
-  //       ['Friday', 'Closed'],
-  //       ['Saturday', 'Closed'],
-  //       ['Sunday', 'Closed'],
-  //     ],
-  //     reviews: [
-  //       {
-  //         id: 'id',
-  //         user: {
-  //           name: 'name',
-  //           photoUrl: 'http://',
-  //         },
-  //         text: 'text',
-  //         timeCreated: '01-01-2020',
-  //         ratingImage: {
-  //           testUri: '../../../src/assets/stars_small_5.png',
-  //         },
-  //       },
-  //     ],
-  //   };
-  //   spy.mockReturnValue({
-  //     business: business,
-  //     loading: false,
-  //     error: undefined,
-  //   });
+    jest.spyOn(fakeUseCase, 'execute').mockResolvedValue(fakeBusiness);
 
-  //   // When
-  //   const { result } = renderHook(() => useBusinessDetails(businessId));
+    // Act
+    const { result, waitForNextUpdate } = renderHook(() => useBusinessDetails(businessId));
 
-  //   // Then
-  //   expect(result.current.state.business).toStrictEqual(expectedBusiness);
-  //   expect(result.current.state.isLoading).toEqual(false);
-  //   expect(result.current.state.error).toBeUndefined();
-  // });
+    // Assert
+    expect(result.current.state.business).toBeUndefined();
+    expect(result.current.state.isLoading).toEqual(true);
+    expect(result.current.state.error).toBeUndefined();
+    await waitForNextUpdate();
+    expect(result.current.state.business).toStrictEqual(fakeBusinessDetailsUiModel);
+    expect(result.current.state.isLoading).toEqual(false);
+    expect(result.current.state.error).toBeUndefined();
+    expect(fakeUseCase.execute).toHaveBeenNthCalledWith(1, businessId);
+  });
 
-  // it('loading', async () => {
-  //   // Given
-  //   spy.mockReturnValue({ business: undefined, loading: true, error: undefined });
+  it('error', async () => {
+    // Arrange
+    const error = 'Something went wrong, please try again later.';
+    jest.spyOn(fakeUseCase, 'execute').mockRejectedValue(error);
 
-  //   // When
-  //   const { result } = renderHook(() => useBusinessDetails(businessId));
+    // Act
+    const { result, waitForNextUpdate } = renderHook(() => useBusinessDetails(businessId));
 
-  //   // Then
-  //   expect(result.current.state.business).toStrictEqual(undefined);
-  //   expect(result.current.state.isLoading).toEqual(true);
-  //   expect(result.current.state.error).toBeUndefined();
-  // });
-
-  // it('error', async () => {
-  //   // Given
-  //   const error = new ApolloError({});
-  //   spy.mockReturnValue({ business: undefined, loading: false, error: error });
-
-  //   // When
-  //   const { result } = renderHook(() => useBusinessDetails(businessId));
-
-  //   // Then
-  //   expect(result.current.state.business).toStrictEqual(undefined);
-  //   expect(result.current.state.isLoading).toEqual(false);
-  //   expect(result.current.state.error).toStrictEqual(Error(`Error: ${error}`));
-  // });
+    // Assert
+    expect(result.current.state.business).toBeUndefined();
+    expect(result.current.state.isLoading).toEqual(true);
+    expect(result.current.state.error).toBeUndefined();
+    await waitForNextUpdate();
+    expect(result.current.state.business).toBeUndefined();
+    expect(result.current.state.isLoading).toEqual(false);
+    expect(result.current.state.error).toStrictEqual(Error(`Error: ${error}`));
+    expect(fakeUseCase.execute).toHaveBeenNthCalledWith(1, businessId);
+  });
 });
