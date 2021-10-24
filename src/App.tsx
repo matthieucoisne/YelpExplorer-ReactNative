@@ -1,6 +1,7 @@
 import { DefaultTheme, NavigationContainer, RouteProp } from '@react-navigation/native';
 import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
+import { StatusBar } from 'react-native';
 import { BusinessDetailsScreen } from './features/business/presentation/businessdetails/BusinessDetailsScreen';
 import { BusinessListScreen } from './features/business/presentation/businesslist/BusinessListScreen';
 
@@ -17,29 +18,32 @@ export type BusinessDetailsRouteProp = RouteProp<RootStackParamList, 'BusinessDe
 const Stack = createStackNavigator<RootStackParamList>();
 
 export const App = () => (
-  <NavigationContainer theme={appTheme}>
-    <Stack.Navigator
-      initialRouteName="BusinessList"
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: '#D32F2F',
-        },
-        headerTintColor: '#FFF',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-        },
-      }}
-    >
-      <Stack.Screen
-        name="BusinessList"
-        component={BusinessListScreen}
-        options={{ title: 'YelpExplorer-ReactNative' }}
-      />
-      <Stack.Screen
-        name="BusinessDetails"
-        component={BusinessDetailsScreen}
-        options={{ title: 'YelpExplorer-ReactNative' }}
-      />
-    </Stack.Navigator>
-  </NavigationContainer>
+  <>
+    <StatusBar barStyle="light-content" />
+    <NavigationContainer theme={appTheme}>
+      <Stack.Navigator
+        initialRouteName="BusinessList"
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: '#D32F2F',
+          },
+          headerTintColor: '#FFF',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+      >
+        <Stack.Screen
+          name="BusinessList"
+          component={BusinessListScreen}
+          options={{ title: 'YelpExplorer-ReactNative' }}
+        />
+        <Stack.Screen
+          name="BusinessDetails"
+          component={BusinessDetailsScreen}
+          options={{ title: 'YelpExplorer-ReactNative' }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  </>
 );
