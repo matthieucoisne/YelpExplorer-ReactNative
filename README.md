@@ -4,12 +4,12 @@
 
 ## Project Description
 
-YelpExplorer-ReactNative is a cross-platform application that shows a list of business, their details and latest reviews using [Yelp](https://www.yelp.com/)'s GraphQL API.<br/>
+YelpExplorer-ReactNative is a cross-platform application that shows a list of business, their details and latest reviews using [Yelp](https://www.yelp.com/)'s API.<br/>
 This is a React Native port of the [YelpExplorer-Flutter project](https://github.com/matthieucoisne/YelpExplorer-Flutter/).
 
 Business List | Business Details
 :-------------------------:|:-------------------------:
-![YelpExplorer-React Native - Business List](https://github.com/matthieucoisne/YelpExplorer-ReactNative/blob/main/media/YelpExplorer-ReactNative-BusinessList.png) | ![YelpExplorer-React Native - Business Details](https://github.com/matthieucoisne/YelpExplorer-ReactNative/blob/main/media/YelpExplorer-ReactNative-BusinessDetails.png)
+![YelpExplorer-React Native - Business List](https://github.com/matthieucoisne/YelpExplorer-ReactNative/blob/main/media/YelpExplorer-ReactNative-BusinessList.jpg) | ![YelpExplorer-React Native - Business Details](https://github.com/matthieucoisne/YelpExplorer-ReactNative/blob/main/media/YelpExplorer-ReactNative-BusinessDetails.jpg)
 
 ## Project Characteristics
 
@@ -54,7 +54,7 @@ To retrieve data from Yelp's API, you need to obtain your own API key:
 
 1. Request your API key: https://www.yelp.com/developers/documentation/v3/authentication<br/>
    Note: You might need to join the developer beta to use GraphQL.
-2. Create `config` folder located in this project's root folder. Then, create a `app_config.json` file in that `config` folder and add your API key like this:
+2. Create a `config` folder located in this project's root folder. Then, create a `app_config.json` file in that `config` folder and add your API key like this:
    ```
    {
      "api_key": "YOUR_API_KEY"
