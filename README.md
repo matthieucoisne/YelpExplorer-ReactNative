@@ -9,7 +9,7 @@ This is a React Native port of the [YelpExplorer-Flutter project](https://github
 
 Business List | Business Details
 :-------------------------:|:-------------------------:
-![YelpExplorer-React Native - Business List](https://github.com/matthieucoisne/YelpExplorer-ReactNative/blob/main/media/YelpExplorer-ReactNative-BusinessList.jpg) | ![YelpExplorer-React Native - Business Details](https://github.com/matthieucoisne/YelpExplorer-ReactNative/blob/main/media/YelpExplorer-ReactNative-BusinessDetails.jpg)
+![YelpExplorer-React Native - Business List](https://github.com/matthieucoisne/YelpExplorer-ReactNative/blob/main/media/YelpExplorer-ReactNative-BusinessList.png) | ![YelpExplorer-React Native - Business Details](https://github.com/matthieucoisne/YelpExplorer-ReactNative/blob/main/media/YelpExplorer-ReactNative-BusinessDetails.png)
 
 ## Project Characteristics
 
