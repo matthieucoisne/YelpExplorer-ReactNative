@@ -1,6 +1,6 @@
-import { Business } from '../model/Business';
-import { BusinessRepository } from '../repository/BusinessRepository';
-import { GetBusinessDetailsUseCase } from './GetBusinessDetailsUseCase';
+import {Business} from '../model/Business';
+import {BusinessRepository} from '../repository/BusinessRepository';
+import {GetBusinessDetailsUseCase} from './GetBusinessDetailsUseCase';
 
 export class GetBusinessDetailsUseCaseImpl implements GetBusinessDetailsUseCase {
   private repository: BusinessRepository;

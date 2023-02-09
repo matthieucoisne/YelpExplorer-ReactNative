@@ -1,4 +1,4 @@
-import { ReviewGraphQLModel } from './ReviewGraphQLModel';
+import {ReviewGraphQLModel} from './ReviewGraphQLModel';
 
 export interface BusinessListGraphQLModel {
   search: {

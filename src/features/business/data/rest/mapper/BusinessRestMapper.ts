@@ -1,6 +1,6 @@
 import * as Helper from '../../../../../core/Helper';
-import { Business } from '../../../domain/model/Business';
-import { BusinessRestModel } from '../model/BusinessRestModel';
+import {Business} from '../../../domain/model/Business';
+import {BusinessRestModel} from '../model/BusinessRestModel';
 
 export const toDomainModels = (businesses: BusinessRestModel[]): Business[] => {
   return businesses.map(business => {
@@ -15,7 +15,7 @@ export const toDomainModel = (business: BusinessRestModel): Business => {
 
   const hours = new Map<number, string[]>();
   if (business.hours && business.hours?.length > 0) {
-    const openingHours = business.hours[0].open; // Only care about regular hours, index 0
+    const openingHours = business.hours[0].open; // Regular hours are at index 0
     if (openingHours.length > 0) {
       const openingHoursPerDay = Helper.groupBy(openingHours, open => open.day);
       openingHoursPerDay.forEach((openList, day) => {

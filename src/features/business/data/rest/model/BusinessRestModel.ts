@@ -1,4 +1,4 @@
-import { ReviewRestModel } from './ReviewRestModel';
+import {ReviewRestModel} from './ReviewRestModel';
 
 export interface BusinessListRestModel {
   businesses: BusinessRestModel[];

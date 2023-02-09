@@ -1,4 +1,4 @@
 export interface UserRestModel {
   name: string;
-  image_url: string | undefined;
+  image_url?: string;
 }

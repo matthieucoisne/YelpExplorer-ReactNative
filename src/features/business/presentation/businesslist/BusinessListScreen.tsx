@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/core';
+import {useNavigation} from '@react-navigation/core';
 import React from 'react';
 import {
   ActivityIndicator,
@@ -10,12 +10,12 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { BusinessDetailsNavigationProp } from '../../../../App';
-import { BusinessUiModel } from './BusinessListUiModel';
-import { useBusinessList } from './useBusinessList';
+import {BusinessDetailsNavigationProp} from '../../../../App';
+import {BusinessUiModel} from './BusinessListUiModel';
+import {useBusinessList} from './useBusinessList';
 
 export const BusinessListScreen = () => {
-  const { state } = useBusinessList('Sushi', 'Montreal', 'price', 20);
+  const {state} = useBusinessList('Sushi', 'Montreal', 'price', 20);
 
   return (
     <SafeAreaView style={styles.screen}>
@@ -25,7 +25,7 @@ export const BusinessListScreen = () => {
         <FlatList
           data={state.businesses}
           keyExtractor={business => business.id}
-          renderItem={({ item }) => {
+          renderItem={({item}) => {
             return <Business business={item} />;
           }}
         />
@@ -34,7 +34,7 @@ export const BusinessListScreen = () => {
   );
 };
 
-const Business = ({ business }: { business: BusinessUiModel }) => {
+const Business = ({business}: {business: BusinessUiModel}) => {
   const navigation = useNavigation<BusinessDetailsNavigationProp>();
 
   return (
@@ -43,10 +43,9 @@ const Business = ({ business }: { business: BusinessUiModel }) => {
         navigation.navigate('BusinessDetails', {
           businessId: business.id,
         });
-      }}
-    >
+      }}>
       <View style={styles.businessCard}>
-        <Image style={styles.businessPhoto} source={{ uri: business.photoUrl }} />
+        <Image style={styles.businessPhoto} source={{uri: business.photoUrl}} />
         <View style={styles.businessDetails}>
           <Text style={styles.businessName}>{business.name}</Text>
           <View style={styles.ratingAndDate}>

@@ -1,4 +1,4 @@
-import { Review } from './Review';
+import {Review} from './Review';
 
 export interface Business {
   id: string;

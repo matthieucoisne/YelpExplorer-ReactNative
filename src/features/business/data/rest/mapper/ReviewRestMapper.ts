@@ -1,6 +1,6 @@
-import { Review } from '../../../domain/model/Review';
-import { User } from '../../../domain/model/User';
-import { ReviewRestModel } from '../model/ReviewRestModel';
+import {Review} from '../../../domain/model/Review';
+import {User} from '../../../domain/model/User';
+import {ReviewRestModel} from '../model/ReviewRestModel';
 
 export const toDomainModels = (reviews: ReviewRestModel[]): Review[] => {
   return reviews.map(review => {

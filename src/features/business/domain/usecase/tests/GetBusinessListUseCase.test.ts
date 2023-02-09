@@ -1,6 +1,6 @@
-import { Business } from '../../model/Business';
-import { BusinessRepository } from '../../repository/BusinessRepository';
-import { GetBusinessListUseCaseImpl } from '../GetBusinessListUseCaseImpl';
+import {Business} from '../../model/Business';
+import {BusinessRepository} from '../../repository/BusinessRepository';
+import {GetBusinessListUseCaseImpl} from '../GetBusinessListUseCaseImpl';
 
 describe('GetBusinessListUseCase', () => {
   const term = 'term';
@@ -23,15 +23,18 @@ describe('GetBusinessListUseCase', () => {
       reviews: [],
     };
     const fakeRepository: BusinessRepository = {
-      getBusinessList(term: string, location: string, sortBy: string, limit: number): Promise<Business[]> {
+      getBusinessList(): Promise<Business[]> {
         return Promise.resolve([fakeBusiness]);
       },
-      getBusinessDetailsWithReviews(businessId: string): Promise<Business> {
+      getBusinessDetailsWithReviews(): Promise<Business> {
         throw new Error('IGNORED');
       },
     };
     const mockGetBusinessList = jest.spyOn(fakeRepository, 'getBusinessList');
-    const mockGetBusinessDetailsWithReviews = jest.spyOn(fakeRepository, 'getBusinessDetailsWithReviews');
+    const mockGetBusinessDetailsWithReviews = jest.spyOn(
+      fakeRepository,
+      'getBusinessDetailsWithReviews',
+    );
 
     const usecase = new GetBusinessListUseCaseImpl(fakeRepository);
 
