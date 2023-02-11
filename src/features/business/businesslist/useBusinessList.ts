@@ -1,6 +1,10 @@
+import {useQuery} from '@apollo/client';
 import {useEffect, useReducer} from 'react';
-import {getBusinessListUseCase} from '../../../../core/Inject';
-import {Business} from '../../domain/model/Business';
+import {
+  BusinessGraphQLModel,
+  BusinessListGraphQLModel,
+} from '../../../data/graphql/model/BusinessGraphQLModel';
+import {businessListQuery} from '../../../data/graphql/query/BusinessListQuery';
 import * as BusinessListMapper from './BusinessListMapper';
 import {BusinessListUiModel} from './BusinessListUiModel';
 
@@ -27,7 +31,7 @@ enum ActionType {
 
 interface BusinessListSuccess {
   type: ActionType.SUCCESS;
-  businesses: Business[];
+  businesses: BusinessGraphQLModel[];
 }
 
 interface BusinessListLoading {
@@ -63,23 +67,24 @@ export const useBusinessList = (
   limit: number,
 ): UseBusinessListHook => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const {data, loading, error} = useQuery<BusinessListGraphQLModel>(businessListQuery, {
+    variables: {
+      term,
+      location,
+      sortBy,
+      limit,
+    },
+  });
 
   useEffect(() => {
-    const getBusinessList = async () => {
-      try {
-        const businesses = await getBusinessListUseCase.execute(
-          term,
-          location,
-          sortBy,
-          limit,
-        );
-        dispatch({type: ActionType.SUCCESS, businesses: businesses});
-      } catch (error) {
-        dispatch({type: ActionType.ERROR, error: Error(`Error: ${error}`)});
-      }
-    };
-    getBusinessList();
-  }, [limit, location, sortBy, term]);
+    if (loading) {
+      dispatch({type: ActionType.LOADING});
+    } else if (error !== undefined) {
+      dispatch({type: ActionType.ERROR, error: Error(`Error: ${error}`)});
+    } else {
+      dispatch({type: ActionType.SUCCESS, businesses: data?.search?.business ?? []});
+    }
+  }, [data, loading, error]);
 
   return {state};
 };

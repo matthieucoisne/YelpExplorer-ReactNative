@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {BusinessDetailsNavigationProp} from '../../../../App';
+import {BusinessDetailsNavigationProp} from '../../../App';
 import {BusinessUiModel} from './BusinessListUiModel';
 import {useBusinessList} from './useBusinessList';
 

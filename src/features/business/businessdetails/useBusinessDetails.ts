@@ -1,6 +1,10 @@
+import {useQuery} from '@apollo/client';
 import {useEffect, useReducer} from 'react';
-import {getBusinessDetailsUseCase} from '../../../../core/Inject';
-import {Business} from '../../domain/model/Business';
+import {
+  BusinessDetailsGraphQLModel,
+  BusinessGraphQLModel,
+} from '../../../data/graphql/model/BusinessGraphQLModel';
+import {businessDetailsQuery} from '../../../data/graphql/query/BusinessDetailsQuery';
 import * as BusinessDetailsMapper from './BusinessDetailsMapper';
 import {BusinessDetailsUiModel} from './BusinessDetailsUiModel';
 
@@ -26,7 +30,7 @@ enum ActionType {
 
 interface BusinessDetailsSuccess {
   type: ActionType.SUCCESS;
-  business: Business;
+  business: BusinessGraphQLModel;
 }
 
 interface BusinessDetailsLoading {
@@ -57,18 +61,24 @@ const reducer = (state: State, action: Action): State => {
 
 export const useBusinessDetails = (businessId: string): UseBusinessDetailsHook => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const {data, loading, error} = useQuery<BusinessDetailsGraphQLModel>(
+    businessDetailsQuery,
+    {
+      variables: {
+        id: businessId,
+      },
+    },
+  );
 
   useEffect(() => {
-    const getBusinessDetails = async () => {
-      try {
-        const business = await getBusinessDetailsUseCase.execute(businessId);
-        dispatch({type: ActionType.SUCCESS, business: business});
-      } catch (error) {
-        dispatch({type: ActionType.ERROR, error: Error(`Error: ${error}`)});
-      }
-    };
-    getBusinessDetails();
-  }, [businessId]);
+    if (loading) {
+      dispatch({type: ActionType.LOADING});
+    } else if (error !== undefined) {
+      dispatch({type: ActionType.ERROR, error: Error(`Error: ${error}`)});
+    } else {
+      dispatch({type: ActionType.SUCCESS, business: data!.business});
+    }
+  }, [data, loading, error]);
 
   return {state};
 };

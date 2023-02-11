@@ -3,13 +3,15 @@
     "**/.git": true,
     "**/.DS_Store": true,
     "**/node_modules": true,
-    "build": true
+    "build": true,
+    "vendor": true
   },
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
   "search.exclude": {
     "**/node_modules": true,
-    "build": true
+    "build": true,
+    "vendor": true
   },
   "editor.tabSize": 2,
   "editor.formatOnSave": true,

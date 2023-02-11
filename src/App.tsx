@@ -1,9 +1,11 @@
+import {ApolloProvider} from '@apollo/client';
 import {DefaultTheme, NavigationContainer, RouteProp} from '@react-navigation/native';
 import {createStackNavigator, StackNavigationProp} from '@react-navigation/stack';
 import React from 'react';
 import {StatusBar} from 'react-native';
-import {BusinessDetailsScreen} from './features/business/presentation/businessdetails/BusinessDetailsScreen';
-import {BusinessListScreen} from './features/business/presentation/businesslist/BusinessListScreen';
+import {graphQLClient} from './core/GraphQLClient';
+import {BusinessDetailsScreen} from './features/business/businessdetails/BusinessDetailsScreen';
+import {BusinessListScreen} from './features/business/businesslist/BusinessListScreen';
 
 // Theme
 const appTheme = {
@@ -24,7 +26,7 @@ export type BusinessDetailsRouteProp = RouteProp<RootStackParamList, 'BusinessDe
 const Stack = createStackNavigator<RootStackParamList>();
 
 export const App = () => (
-  <>
+  <ApolloProvider client={graphQLClient}>
     <StatusBar barStyle="light-content" />
     <NavigationContainer theme={appTheme}>
       <Stack.Navigator
@@ -50,5 +52,5 @@ export const App = () => (
         />
       </Stack.Navigator>
     </NavigationContainer>
-  </>
+  </ApolloProvider>
 );

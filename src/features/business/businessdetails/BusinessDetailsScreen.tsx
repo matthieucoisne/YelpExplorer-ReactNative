@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 import {Rows, Table} from 'react-native-table-component';
-import {BusinessDetailsRouteProp} from '../../../../App';
+import {BusinessDetailsRouteProp} from '../../../App';
 import {BusinessDetailsUiModel, ReviewUiModel} from './BusinessDetailsUiModel';
 import {useBusinessDetails} from './useBusinessDetails';
 
