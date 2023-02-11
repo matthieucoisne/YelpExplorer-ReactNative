@@ -1,11 +1,11 @@
-import { renderHook } from '@testing-library/react-hooks';
-import { Business } from '../../../domain/model/Business';
-import { GetBusinessDetailsUseCase } from '../../../domain/usecase/GetBusinessDetailsUseCase';
-import { BusinessDetailsUiModel } from '../BusinessDetailsUiModel';
-import { useBusinessDetails } from '../useBusinessDetails';
+import {renderHook} from '@testing-library/react-hooks';
+import {Business} from '../../../domain/model/Business';
+import {GetBusinessDetailsUseCase} from '../../../domain/usecase/GetBusinessDetailsUseCase';
+import {BusinessDetailsUiModel} from '../BusinessDetailsUiModel';
+import {useBusinessDetails} from '../useBusinessDetails';
 
 const fakeUseCase: GetBusinessDetailsUseCase = {
-  execute: function (businessId: string): Promise<Business> {
+  execute: function (): Promise<Business> {
     throw new Error('Function not implemented.');
   },
 };
@@ -84,7 +84,7 @@ describe('useBusinessDetails', () => {
     jest.spyOn(fakeUseCase, 'execute').mockResolvedValue(fakeBusiness);
 
     // Act
-    const { result, waitForNextUpdate } = renderHook(() => useBusinessDetails(businessId));
+    const {result, waitForNextUpdate} = renderHook(() => useBusinessDetails(businessId));
 
     // Assert
     expect(result.current.state.business).toBeUndefined();
@@ -103,7 +103,7 @@ describe('useBusinessDetails', () => {
     jest.spyOn(fakeUseCase, 'execute').mockRejectedValue(error);
 
     // Act
-    const { result, waitForNextUpdate } = renderHook(() => useBusinessDetails(businessId));
+    const {result, waitForNextUpdate} = renderHook(() => useBusinessDetails(businessId));
 
     // Assert
     expect(result.current.state.business).toBeUndefined();

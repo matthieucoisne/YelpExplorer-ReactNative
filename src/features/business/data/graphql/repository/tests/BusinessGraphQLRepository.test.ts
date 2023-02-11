@@ -1,11 +1,11 @@
-import { Business } from '../../../../domain/model/Business';
-import { BusinessGraphQLDataSource } from '../../datasource/remote/BusinessGraphQLDataSource';
+import {Business} from '../../../../domain/model/Business';
+import {BusinessGraphQLDataSource} from '../../datasource/remote/BusinessGraphQLDataSource';
 import {
   BusinessDetailsGraphQLModel,
   BusinessGraphQLModel,
   BusinessListGraphQLModel,
 } from '../../model/BusinessGraphQLModel';
-import { BusinessGraphQLRepository } from '../BusinessGraphQLRepository';
+import {BusinessGraphQLRepository} from '../BusinessGraphQLRepository';
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -19,15 +19,10 @@ describe('BusinessGraphQLRepository', () => {
   const businessId = 'businessId';
 
   const fakeGraphQLDataSource: BusinessGraphQLDataSource = {
-    getBusinessList(
-      term: string,
-      location: string,
-      sortBy: string,
-      limit: number,
-    ): Promise<BusinessListGraphQLModel> {
+    getBusinessList(): Promise<BusinessListGraphQLModel> {
       throw new Error('Function not implemented.');
     },
-    getBusinessDetailsWithReviews(businessId: string): Promise<BusinessDetailsGraphQLModel> {
+    getBusinessDetailsWithReviews(): Promise<BusinessDetailsGraphQLModel> {
       throw new Error('Function not implemented.');
     },
   };
@@ -40,10 +35,10 @@ describe('BusinessGraphQLRepository', () => {
       name: 'name',
       photos: ['http://'],
       review_count: 1337,
-      categories: [{ title: 'category#1' }],
+      categories: [{title: 'category#1'}],
       rating: 4.5,
       price: '$$',
-      location: { address1: 'address1', city: 'city' },
+      location: {address1: 'address1', city: 'city'},
     };
     const fakeBusinessListGraphQLModel: BusinessListGraphQLModel = {
       search: {
@@ -69,7 +64,10 @@ describe('BusinessGraphQLRepository', () => {
       .mockImplementation(() => {
         return Promise.resolve(fakeBusinessListGraphQLModel);
       });
-    const mockGetBusinessDetails = jest.spyOn(fakeGraphQLDataSource, 'getBusinessDetailsWithReviews');
+    const mockGetBusinessDetails = jest.spyOn(
+      fakeGraphQLDataSource,
+      'getBusinessDetailsWithReviews',
+    );
 
     // Act
     const result = await repository.getBusinessList(term, location, sortBy, limit);
@@ -88,10 +86,10 @@ describe('BusinessGraphQLRepository', () => {
         name: 'name',
         photos: ['http://'],
         review_count: 1337,
-        categories: [{ title: 'category#1' }],
+        categories: [{title: 'category#1'}],
         rating: 4.5,
         price: '$$',
-        location: { address1: 'address1', city: 'city' },
+        location: {address1: 'address1', city: 'city'},
         hours: [
           {
             open: [

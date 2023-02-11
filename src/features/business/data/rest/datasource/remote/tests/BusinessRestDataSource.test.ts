@@ -1,8 +1,8 @@
 import fetchMock from 'jest-fetch-mock';
 import * as Constants from '../../../../../../../core/Constants';
-import { BusinessListRestModel, BusinessRestModel } from '../../../model/BusinessRestModel';
-import { ReviewListRestModel } from '../../../model/ReviewRestModel';
-import { BusinessRestDataSourceImpl } from '../BusinessRestDataSource';
+import {BusinessListRestModel, BusinessRestModel} from '../../../model/BusinessRestModel';
+import {ReviewListRestModel} from '../../../model/ReviewRestModel';
+import {BusinessRestDataSourceImpl} from '../BusinessRestDataSource';
 
 fetchMock.enableMocks();
 
@@ -26,10 +26,10 @@ describe('BusinessRestDataSource', () => {
       name: 'name',
       image_url: 'http://',
       review_count: 1337,
-      categories: [{ title: 'category#1' }],
+      categories: [{title: 'category#1'}],
       rating: 4.5,
       price: '$$',
-      location: { address1: 'address1', city: 'city' },
+      location: {address1: 'address1', city: 'city'},
     };
     const fakeBusinessList: BusinessListRestModel = {
       businesses: [fakeBusiness, fakeBusiness],
@@ -58,10 +58,10 @@ describe('BusinessRestDataSource', () => {
       name: 'name',
       image_url: 'http://',
       review_count: 1337,
-      categories: [{ title: 'category#1' }],
+      categories: [{title: 'category#1'}],
       rating: 4.5,
       price: '$$',
-      location: { address1: 'address1', city: 'city' },
+      location: {address1: 'address1', city: 'city'},
       hours: [
         {
           open: [
@@ -81,10 +81,14 @@ describe('BusinessRestDataSource', () => {
 
     // Assert
     expect(result).toEqual(fakeBusiness);
-    expect(fetchMock).toHaveBeenNthCalledWith(1, `${Constants.URL_REST}/businesses/${businessId}`, {
-      method: 'GET',
-      headers: Constants.HEADERS,
-    });
+    expect(fetchMock).toHaveBeenNthCalledWith(
+      1,
+      `${Constants.URL_REST}/businesses/${businessId}`,
+      {
+        method: 'GET',
+        headers: Constants.HEADERS,
+      },
+    );
   });
 
   it('should get the business reviews from the REST API', async () => {
@@ -110,9 +114,13 @@ describe('BusinessRestDataSource', () => {
 
     // Assert
     expect(result).toEqual(fakeReviews);
-    expect(fetchMock).toHaveBeenNthCalledWith(1, `${Constants.URL_REST}/businesses/${businessId}/reviews`, {
-      method: 'GET',
-      headers: Constants.HEADERS,
-    });
+    expect(fetchMock).toHaveBeenNthCalledWith(
+      1,
+      `${Constants.URL_REST}/businesses/${businessId}/reviews`,
+      {
+        method: 'GET',
+        headers: Constants.HEADERS,
+      },
+    );
   });
 });

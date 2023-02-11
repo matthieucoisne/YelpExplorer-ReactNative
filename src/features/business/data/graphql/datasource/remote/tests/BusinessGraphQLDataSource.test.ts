@@ -3,9 +3,9 @@ import {
   BusinessGraphQLModel,
   BusinessListGraphQLModel,
 } from '../../../model/BusinessGraphQLModel';
-import { businessDetailsQuery } from '../../../query/BusinessDetailsQuery';
-import { businessListQuery } from '../../../query/BusinessListQuery';
-import { BusinessGraphQLDataSourceImpl } from '../BusinessGraphQLDataSource';
+import {businessDetailsQuery} from '../../../query/BusinessDetailsQuery';
+import {businessListQuery} from '../../../query/BusinessListQuery';
+import {BusinessGraphQLDataSourceImpl} from '../BusinessGraphQLDataSource';
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -32,17 +32,19 @@ describe('BusinessGraphQLDataSource', () => {
       name: 'name',
       photos: ['http://'],
       review_count: 1337,
-      categories: [{ title: 'category#1' }],
+      categories: [{title: 'category#1'}],
       rating: 4.5,
       price: '$$',
-      location: { address1: 'address1', city: 'city' },
+      location: {address1: 'address1', city: 'city'},
     };
     const fakeBusinessList: BusinessListGraphQLModel = {
       search: {
         business: [fakeBusiness, fakeBusiness],
       },
     };
-    const mockQuery = jest.spyOn(graphQLClient, 'query').mockResolvedValue({ data: fakeBusinessList });
+    const mockQuery = jest
+      .spyOn(graphQLClient, 'query')
+      .mockResolvedValue({data: fakeBusinessList});
 
     // Act
     const result = await datasource.getBusinessList(term, location, sortBy, limit);
@@ -68,10 +70,10 @@ describe('BusinessGraphQLDataSource', () => {
         name: 'name',
         photos: ['http://'],
         review_count: 1337,
-        categories: [{ title: 'category#1' }],
+        categories: [{title: 'category#1'}],
         rating: 4.5,
         price: '$$',
-        location: { address1: 'address1', city: 'city' },
+        location: {address1: 'address1', city: 'city'},
         hours: [
           {
             open: [
@@ -97,7 +99,9 @@ describe('BusinessGraphQLDataSource', () => {
         ],
       },
     };
-    const mockQuery = jest.spyOn(graphQLClient, 'query').mockResolvedValue({ data: fakeBusiness });
+    const mockQuery = jest
+      .spyOn(graphQLClient, 'query')
+      .mockResolvedValue({data: fakeBusiness});
 
     // Act
     const result = await datasource.getBusinessDetailsWithReviews(businessId);

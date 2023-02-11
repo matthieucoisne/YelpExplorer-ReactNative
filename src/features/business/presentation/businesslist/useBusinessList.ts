@@ -1,8 +1,8 @@
-import { useEffect, useReducer } from 'react';
-import { getBusinessListUseCase } from '../../../../core/Inject';
-import { Business } from '../../domain/model/Business';
+import {useEffect, useReducer} from 'react';
+import {getBusinessListUseCase} from '../../../../core/Inject';
+import {Business} from '../../domain/model/Business';
 import * as BusinessListMapper from './BusinessListMapper';
-import { BusinessListUiModel } from './BusinessListUiModel';
+import {BusinessListUiModel} from './BusinessListUiModel';
 
 export interface UseBusinessListHook {
   state: State;
@@ -44,7 +44,7 @@ type Action = BusinessListLoading | BusinessListSuccess | BusinessListError;
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case ActionType.LOADING:
-      return { ...state, isLoading: true };
+      return {...state, isLoading: true};
     case ActionType.SUCCESS:
       return {
         ...state,
@@ -52,7 +52,7 @@ const reducer = (state: State, action: Action): State => {
         businesses: BusinessListMapper.toUiModels(action.businesses),
       };
     case ActionType.ERROR:
-      return { ...state, isLoading: false, error: action.error };
+      return {...state, isLoading: false, error: action.error};
   }
 };
 
@@ -67,14 +67,19 @@ export const useBusinessList = (
   useEffect(() => {
     const getBusinessList = async () => {
       try {
-        const businesses = await getBusinessListUseCase.execute(term, location, sortBy, limit);
-        dispatch({ type: ActionType.SUCCESS, businesses: businesses });
+        const businesses = await getBusinessListUseCase.execute(
+          term,
+          location,
+          sortBy,
+          limit,
+        );
+        dispatch({type: ActionType.SUCCESS, businesses: businesses});
       } catch (error) {
-        dispatch({ type: ActionType.ERROR, error: Error(`Error: ${error}`) });
+        dispatch({type: ActionType.ERROR, error: Error(`Error: ${error}`)});
       }
     };
     getBusinessList();
-  }, []);
+  }, [limit, location, sortBy, term]);
 
-  return { state };
+  return {state};
 };

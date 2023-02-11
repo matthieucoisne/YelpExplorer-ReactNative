@@ -1,8 +1,8 @@
-import { useEffect, useReducer } from 'react';
-import { getBusinessDetailsUseCase } from '../../../../core/Inject';
-import { Business } from '../../domain/model/Business';
+import {useEffect, useReducer} from 'react';
+import {getBusinessDetailsUseCase} from '../../../../core/Inject';
+import {Business} from '../../domain/model/Business';
 import * as BusinessDetailsMapper from './BusinessDetailsMapper';
-import { BusinessDetailsUiModel } from './BusinessDetailsUiModel';
+import {BusinessDetailsUiModel} from './BusinessDetailsUiModel';
 
 export interface UseBusinessDetailsHook {
   state: State;
@@ -43,7 +43,7 @@ type Action = BusinessDetailsLoading | BusinessDetailsSuccess | BusinessDetailsE
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case ActionType.LOADING:
-      return { ...state, isLoading: true };
+      return {...state, isLoading: true};
     case ActionType.SUCCESS:
       return {
         ...state,
@@ -51,7 +51,7 @@ const reducer = (state: State, action: Action): State => {
         business: BusinessDetailsMapper.toUiModel(action.business),
       };
     case ActionType.ERROR:
-      return { ...state, isLoading: false, error: action.error };
+      return {...state, isLoading: false, error: action.error};
   }
 };
 
@@ -62,13 +62,13 @@ export const useBusinessDetails = (businessId: string): UseBusinessDetailsHook =
     const getBusinessDetails = async () => {
       try {
         const business = await getBusinessDetailsUseCase.execute(businessId);
-        dispatch({ type: ActionType.SUCCESS, business: business });
+        dispatch({type: ActionType.SUCCESS, business: business});
       } catch (error) {
-        dispatch({ type: ActionType.ERROR, error: Error(`Error: ${error}`) });
+        dispatch({type: ActionType.ERROR, error: Error(`Error: ${error}`)});
       }
     };
     getBusinessDetails();
-  }, []);
+  }, [businessId]);
 
-  return { state };
+  return {state};
 };

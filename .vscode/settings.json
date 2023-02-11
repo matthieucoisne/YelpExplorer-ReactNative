@@ -13,12 +13,7 @@
   },
   "editor.tabSize": 2,
   "editor.formatOnSave": true,
-  "prettier.printWidth": 110,
-  "prettier.bracketSpacing": true,
-  "prettier.singleQuote": true,
-  "prettier.trailingComma": "all",
-  "prettier.arrowParens": "avoid",
-
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[typescript]": {
     "editor.codeActionsOnSave": {
       "source.organizeImports": true

@@ -1,4 +1,4 @@
-import { UserGraphQLModel } from './UserGraphQLModel';
+import {UserGraphQLModel} from './UserGraphQLModel';
 
 export interface ReviewGraphQLModel {
   id: string;

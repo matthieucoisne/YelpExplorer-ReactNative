@@ -1,8 +1,8 @@
-import { Business } from '../../../../domain/model/Business';
-import { BusinessRestDataSource } from '../../datasource/remote/BusinessRestDataSource';
-import { BusinessListRestModel, BusinessRestModel } from '../../model/BusinessRestModel';
-import { ReviewListRestModel, ReviewRestModel } from '../../model/ReviewRestModel';
-import { BusinessRestRepository } from '../BusinessRestRepository';
+import {Business} from '../../../../domain/model/Business';
+import {BusinessRestDataSource} from '../../datasource/remote/BusinessRestDataSource';
+import {BusinessListRestModel, BusinessRestModel} from '../../model/BusinessRestModel';
+import {ReviewListRestModel, ReviewRestModel} from '../../model/ReviewRestModel';
+import {BusinessRestRepository} from '../BusinessRestRepository';
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -16,18 +16,13 @@ describe('BusinessRestRepository', () => {
   const businessId = 'businessId';
 
   const fakeRestDataSource: BusinessRestDataSource = {
-    getBusinessList: function (
-      term: string,
-      location: string,
-      sortBy: string,
-      limit: number,
-    ): Promise<BusinessListRestModel> {
+    getBusinessList: function (): Promise<BusinessListRestModel> {
       throw new Error('Function not implemented.');
     },
-    getBusinessDetails: function (businessId: string): Promise<BusinessRestModel> {
+    getBusinessDetails: function (): Promise<BusinessRestModel> {
       throw new Error('Function not implemented.');
     },
-    getBusinessReviews: function (businessId: string): Promise<ReviewListRestModel> {
+    getBusinessReviews: function (): Promise<ReviewListRestModel> {
       throw new Error('Function not implemented.');
     },
   };
@@ -40,10 +35,10 @@ describe('BusinessRestRepository', () => {
       name: 'name',
       image_url: 'http://',
       review_count: 1337,
-      categories: [{ title: 'category#1' }],
+      categories: [{title: 'category#1'}],
       rating: 4.5,
       price: '$$',
-      location: { address1: 'address1', city: 'city' },
+      location: {address1: 'address1', city: 'city'},
     };
     const fakeBusinessListRestModel: BusinessListRestModel = {
       businesses: [fakeBusinessRestModel, fakeBusinessRestModel],
@@ -62,9 +57,11 @@ describe('BusinessRestRepository', () => {
     };
     const fakeBusinessList = [fakeBusiness, fakeBusiness];
 
-    const mockGetBusinessList = jest.spyOn(fakeRestDataSource, 'getBusinessList').mockImplementation(() => {
-      return Promise.resolve(fakeBusinessListRestModel);
-    });
+    const mockGetBusinessList = jest
+      .spyOn(fakeRestDataSource, 'getBusinessList')
+      .mockImplementation(() => {
+        return Promise.resolve(fakeBusinessListRestModel);
+      });
     const mockGetBusinessDetails = jest.spyOn(fakeRestDataSource, 'getBusinessDetails');
     const mockGetBusinessReviews = jest.spyOn(fakeRestDataSource, 'getBusinessReviews');
 
@@ -85,10 +82,10 @@ describe('BusinessRestRepository', () => {
       name: 'name',
       image_url: 'http://',
       review_count: 1337,
-      categories: [{ title: 'category#1' }],
+      categories: [{title: 'category#1'}],
       rating: 4.5,
       price: '$$',
-      location: { address1: 'address1', city: 'city' },
+      location: {address1: 'address1', city: 'city'},
       hours: [
         {
           open: [

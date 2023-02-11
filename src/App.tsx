@@ -1,19 +1,25 @@
-import { DefaultTheme, NavigationContainer, RouteProp } from '@react-navigation/native';
-import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
+import {DefaultTheme, NavigationContainer, RouteProp} from '@react-navigation/native';
+import {createStackNavigator, StackNavigationProp} from '@react-navigation/stack';
 import React from 'react';
-import { StatusBar } from 'react-native';
-import { BusinessDetailsScreen } from './features/business/presentation/businessdetails/BusinessDetailsScreen';
-import { BusinessListScreen } from './features/business/presentation/businesslist/BusinessListScreen';
+import {StatusBar} from 'react-native';
+import {BusinessDetailsScreen} from './features/business/presentation/businessdetails/BusinessDetailsScreen';
+import {BusinessListScreen} from './features/business/presentation/businesslist/BusinessListScreen';
 
 // Theme
-const appTheme = { ...DefaultTheme, colors: { ...DefaultTheme.colors, background: '#333' } };
+const appTheme = {
+  ...DefaultTheme,
+  colors: {...DefaultTheme.colors, background: '#333'},
+};
 
 // Navigation
 type RootStackParamList = {
   BusinessList: undefined;
-  BusinessDetails: { businessId: string };
+  BusinessDetails: {businessId: string};
 };
-export type BusinessDetailsNavigationProp = StackNavigationProp<RootStackParamList, 'BusinessDetails'>;
+export type BusinessDetailsNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'BusinessDetails'
+>;
 export type BusinessDetailsRouteProp = RouteProp<RootStackParamList, 'BusinessDetails'>;
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -31,17 +37,16 @@ export const App = () => (
           headerTitleStyle: {
             fontWeight: 'bold',
           },
-        }}
-      >
+        }}>
         <Stack.Screen
           name="BusinessList"
           component={BusinessListScreen}
-          options={{ title: 'YelpExplorer-ReactNative' }}
+          options={{title: 'YelpExplorer-ReactNative'}}
         />
         <Stack.Screen
           name="BusinessDetails"
           component={BusinessDetailsScreen}
-          options={{ title: 'YelpExplorer-ReactNative' }}
+          options={{title: 'YelpExplorer-ReactNative'}}
         />
       </Stack.Navigator>
     </NavigationContainer>

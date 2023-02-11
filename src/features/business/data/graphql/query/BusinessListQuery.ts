@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import {gql} from '@apollo/client';
 
 export const businessListQuery = gql`
   query BusinessList($term: String, $location: String!, $sortBy: String, $limit: Int) {

@@ -1,9 +1,13 @@
 import * as Constants from '../../../../core/Constants';
-import { Business } from '../../domain/model/Business';
-import { Review } from '../../domain/model/Review';
-import { User } from '../../domain/model/User';
+import {Business} from '../../domain/model/Business';
+import {Review} from '../../domain/model/Review';
+import {User} from '../../domain/model/User';
 import * as BusinessHelper from '../helper/BusinessHelper';
-import { BusinessDetailsUiModel, ReviewUiModel, UserUiModel } from './BusinessDetailsUiModel';
+import {
+  BusinessDetailsUiModel,
+  ReviewUiModel,
+  UserUiModel,
+} from './BusinessDetailsUiModel';
 
 export const toUiModel = (business: Business): BusinessDetailsUiModel => {
   const hours: string[][] = [];
@@ -12,7 +16,7 @@ export const toUiModel = (business: Business): BusinessDetailsUiModel => {
     const openList = business.hours.get(i) ?? [];
     if (openList.length > 0) {
       for (let j = 0; j < openList.length; j++) {
-        hours.push([j == 0 ? day : '', openList[j]]);
+        hours.push([j === 0 ? day : '', openList[j]]);
       }
     } else {
       hours.push([day, 'Closed']); // TODO i18n
@@ -26,7 +30,10 @@ export const toUiModel = (business: Business): BusinessDetailsUiModel => {
     ratingImage: BusinessHelper.getRatingImage(business.rating),
     reviewCount: `${business.reviewCount} reviews`,
     address: business.address,
-    priceAndCategories: BusinessHelper.formatPriceAndCategories(business.price, business.categories),
+    priceAndCategories: BusinessHelper.formatPriceAndCategories(
+      business.price,
+      business.categories,
+    ),
     hours: hours,
     reviews: toReviewUiModels(business.reviews),
   };

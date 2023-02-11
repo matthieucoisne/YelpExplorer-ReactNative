@@ -1,13 +1,21 @@
 import React from 'react';
-import { ActivityIndicator, FlatList, Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import { Rows, Table } from 'react-native-table-component';
-import { BusinessDetailsRouteProp } from '../../../../App';
-import { BusinessDetailsUiModel, ReviewUiModel } from './BusinessDetailsUiModel';
-import { useBusinessDetails } from './useBusinessDetails';
+import {
+  ActivityIndicator,
+  FlatList,
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+import {Rows, Table} from 'react-native-table-component';
+import {BusinessDetailsRouteProp} from '../../../../App';
+import {BusinessDetailsUiModel, ReviewUiModel} from './BusinessDetailsUiModel';
+import {useBusinessDetails} from './useBusinessDetails';
 
-export const BusinessDetailsScreen = ({ route }: { route: BusinessDetailsRouteProp }) => {
-  const { businessId } = route.params;
-  const { state } = useBusinessDetails(businessId);
+export const BusinessDetailsScreen = ({route}: {route: BusinessDetailsRouteProp}) => {
+  const {businessId} = route.params;
+  const {state} = useBusinessDetails(businessId);
 
   return (
     <SafeAreaView style={styles.screen}>
@@ -18,7 +26,7 @@ export const BusinessDetailsScreen = ({ route }: { route: BusinessDetailsRoutePr
           ListHeaderComponent={<BusinessDetails business={state.business!} />}
           data={state.business!.reviews}
           keyExtractor={review => review.id}
-          renderItem={({ item }) => {
+          renderItem={({item}) => {
             return <Review review={item} />;
           }}
         />
@@ -27,7 +35,7 @@ export const BusinessDetailsScreen = ({ route }: { route: BusinessDetailsRoutePr
   );
 };
 
-const BusinessDetails = ({ business }: { business: BusinessDetailsUiModel }) => {
+const BusinessDetails = ({business}: {business: BusinessDetailsUiModel}) => {
   return (
     <>
       <BusinessInfo business={business} />
@@ -37,10 +45,10 @@ const BusinessDetails = ({ business }: { business: BusinessDetailsUiModel }) => 
   );
 };
 
-const BusinessInfo = ({ business }: { business: BusinessDetailsUiModel }) => {
+const BusinessInfo = ({business}: {business: BusinessDetailsUiModel}) => {
   return (
     <>
-      <Image style={styles.businessPhoto} source={{ uri: business.photoUrl }} />
+      <Image style={styles.businessPhoto} source={{uri: business.photoUrl}} />
       <View style={styles.businessDetails}>
         <Text style={styles.businessName}>{business.name}</Text>
         <View style={styles.ratingAndDate}>
@@ -56,7 +64,7 @@ const BusinessInfo = ({ business }: { business: BusinessDetailsUiModel }) => {
   );
 };
 
-const BusinessHours = ({ hours }: { hours: string[][] }) => {
+const BusinessHours = ({hours}: {hours: string[][]}) => {
   return (
     <View>
       <Text style={styles.sectionName}>Opening Hours</Text>
@@ -67,7 +75,7 @@ const BusinessHours = ({ hours }: { hours: string[][] }) => {
   );
 };
 
-const BusinessReviews = ({ reviews }: { reviews: ReviewUiModel[] }) => {
+const BusinessReviews = ({reviews}: {reviews: ReviewUiModel[]}) => {
   if (reviews.length > 0) {
     return <Text style={styles.sectionName}>Latest Reviews</Text>;
     // Reviews will be displayed with the <FlatList>
@@ -76,13 +84,13 @@ const BusinessReviews = ({ reviews }: { reviews: ReviewUiModel[] }) => {
   }
 };
 
-const Review = ({ review }: { review: ReviewUiModel }) => {
+const Review = ({review}: {review: ReviewUiModel}) => {
   return (
     <>
       <View style={styles.reviewCard}>
         <View style={styles.reviewUser}>
           {/* TODO: add fallback image */}
-          <Image style={styles.reviewUserImage} source={{ uri: review.user.photoUrl }} />
+          <Image style={styles.reviewUserImage} source={{uri: review.user.photoUrl}} />
           <View style={styles.reviewUserAndRating}>
             <Text style={styles.reviewUserName}>{review.user.name}</Text>
             <View style={styles.ratingAndDate}>

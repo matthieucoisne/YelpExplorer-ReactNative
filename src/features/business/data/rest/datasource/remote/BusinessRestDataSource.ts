@@ -1,6 +1,6 @@
 import * as Constants from '../../../../../../core/Constants';
-import { BusinessListRestModel, BusinessRestModel } from '../../model/BusinessRestModel';
-import { ReviewListRestModel } from '../../model/ReviewRestModel';
+import {BusinessListRestModel, BusinessRestModel} from '../../model/BusinessRestModel';
+import {ReviewListRestModel} from '../../model/ReviewRestModel';
 
 export interface BusinessRestDataSource {
   getBusinessList(

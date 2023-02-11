@@ -1,11 +1,11 @@
-import { renderHook } from '@testing-library/react-hooks';
-import { Business } from '../../../domain/model/Business';
-import { GetBusinessListUseCase } from '../../../domain/usecase/GetBusinessListUseCase';
-import { BusinessUiModel } from '../BusinessListUiModel';
-import { useBusinessList } from '../useBusinessList';
+import {renderHook} from '@testing-library/react-hooks';
+import {Business} from '../../../domain/model/Business';
+import {GetBusinessListUseCase} from '../../../domain/usecase/GetBusinessListUseCase';
+import {BusinessUiModel} from '../BusinessListUiModel';
+import {useBusinessList} from '../useBusinessList';
 
 const fakeUseCase: GetBusinessListUseCase = {
-  execute(term: string, location: string, sortBy: string, limit: number): Promise<Business[]> {
+  execute(): Promise<Business[]> {
     throw new Error('Function not implemented.');
   },
 };
@@ -47,11 +47,16 @@ describe('useBusinessList', () => {
         testUri: '../../../src/assets/stars_small_4_half.png',
       },
     };
-    const fakeBusinessListUiModel = [fakeBusinessUiModel, {...fakeBusinessUiModel, name: '2. NAME'}];
+    const fakeBusinessListUiModel = [
+      fakeBusinessUiModel,
+      {...fakeBusinessUiModel, name: '2. NAME'},
+    ];
     jest.spyOn(fakeUseCase, 'execute').mockResolvedValue(fakeBusinessList);
 
     // Act
-    const { result, waitForNextUpdate } = renderHook(() => useBusinessList(term, location, sortBy, limit));
+    const {result, waitForNextUpdate} = renderHook(() =>
+      useBusinessList(term, location, sortBy, limit),
+    );
 
     // Assert
     expect(result.current.state.businesses).toStrictEqual([]);
@@ -70,7 +75,9 @@ describe('useBusinessList', () => {
     jest.spyOn(fakeUseCase, 'execute').mockRejectedValue(error);
 
     // Act
-    const { result, waitForNextUpdate } = renderHook(() => useBusinessList(term, location, sortBy, limit));
+    const {result, waitForNextUpdate} = renderHook(() =>
+      useBusinessList(term, location, sortBy, limit),
+    );
 
     // Assert
     expect(result.current.state.businesses).toStrictEqual([]);
