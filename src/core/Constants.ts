@@ -1,11 +1,11 @@
 export const URL_REST = 'https://api.yelp.com/v3';
 export const URL_GRAPHQL = 'https://api.yelp.com/v3/graphql';
 
-export enum DataLayer {
+export enum DataSource {
   REST,
   GRAPHQL,
 }
-export const DATA_LAYER: DataLayer = DataLayer.GRAPHQL; // Change the data layer for the one you want to use
+export const DATASOURCE: DataSource = DataSource.GRAPHQL; // Change the data source for the one you want to use
 
 const getHeaders = () => {
   const appConfig = require('../../config/app_config.json');

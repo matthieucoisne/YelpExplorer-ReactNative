@@ -12,11 +12,11 @@ import {graphQLClient} from './GraphQLClient';
 // TODO: Find a way to inject these dependencies: useContext? Provider? Add Lazy loading?
 /////////////////////////////////////////////////////////////////////////////////////////
 const getBusinessRepository = (): BusinessRepository => {
-  switch (Constants.DATA_LAYER) {
-    case Constants.DataLayer.REST: {
+  switch (Constants.DATASOURCE) {
+    case Constants.DataSource.REST: {
       return new BusinessRestRepository(new BusinessRestDataSourceImpl());
     }
-    case Constants.DataLayer.GRAPHQL: {
+    case Constants.DataSource.GRAPHQL: {
       return new BusinessGraphQLRepository(
         new BusinessGraphQLDataSourceImpl(graphQLClient),
       );
